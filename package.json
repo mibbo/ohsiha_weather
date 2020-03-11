@@ -1,0 +1,21 @@
+{
+  "name": "ohsiha_weather",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "cd api && npm start",
+    "client": "cd client && npm start",
+    "start": "npm run server & npm run client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mibbo/ohsiha_weather.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mibbo/ohsiha_weather/issues"
+  },
+  "homepage": "https://github.com/mibbo/ohsiha_weather#readme"
+}
