@@ -1,11 +1,87 @@
-.App {
-  text-align: center;
+/*
+ = ======== flexbox ========
+*/
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.card--weather {
+  flex: 0 0 700px;
+
 }
+.card--egain {
+  flex: 0 0 300px;
+}
+
+/*
+= ====== visuals =========
+*/
+* {
+ box-sizing: border-box;
+}
+body {
+ margin: 0
+}
+.cards {
+ min-height: 100vh;
+}
+.card {
+ margin: 12px; 
+ margin-top: 50px;
+ background: #f2f2f2;
+ border-radius: 7px;
+ padding: 0 0 50px 0;
+ border: 0;
+}
+
+/*
+= ====== card inner components =========
+*/
+.card > header {
+ background: #b1d9ff;
+ height: 50px;
+ border-radius:  7px 7px 0 0;
+}
+.card > ul {
+ list-style: none;
+ padding: 0;
+}
+.card > ul li {
+ height: 20px;
+ width: 90%;
+ margin: 10px auto;
+ background: rgba(255,255,255, 0.4);
+}
+.card button {
+ width: 120px;
+ height: 35px;
+ border: 0;
+ margin-left: 12px;
+ border-radius: 7px;
+}
+/*
+ = ======== end ========
+*/
+
+
+/*
+ = ======== end ========
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
