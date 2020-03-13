@@ -3,16 +3,9 @@ const Schema = mongoose.Schema
 
 // Create Schema for the login credentials
 const UserSchema = new Schema({
-   first_name: {
-      type: String
-   },
-   last_name: {
-      type: String
-   },
-   email: {
+   username: {
       type: String,
       required: true
-      // spostin, etunimen ja sukunimen tilalle vain käyttäjänimi
    },
    password: {
       type: String,

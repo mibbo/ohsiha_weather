@@ -12,19 +12,16 @@ process.env.SECRET_KEY = 'secret';
 
 module.exports = {
 
-   // ei välttis pidä olla asynkronoituja!!
    async register(req, res) {
       const today = new Date()
       const userData = {
-         first_name: req.body.first_name,
-         last_name: req.body.last_name,
-         email: req.body.email,
+         username: req.body.username,
          password: req.body.password,
          created: today
       }
 
       User.findOne({
-         email: req.body.email
+         username: req.body.username
       })
          .then(user => {
             if (!user) {
@@ -32,10 +29,11 @@ module.exports = {
                   userData.password = hash
                   User.create(userData)
                      .then(user => {
-                        res.json({ status: user.email + 'Registered!' })
+                        res.json({ status: user.username + 'Registered!' })
                      })
                      .catch(err => {
                         res.send('error: ' + err)
+                        res.json({ error: 'User already exists' })
                      })
                })
             } else {
@@ -50,7 +48,7 @@ module.exports = {
 
    async login(req, res) {
       User.findOne({
-         email: req.body.email
+         username: req.body.username
       })
          .then(user => {
             if (user) {
@@ -58,20 +56,18 @@ module.exports = {
                   // Passwords match
                   const payload = {
                      _id: user._id,
-                     first_name: user.first_name,
-                     last_name: user.last_name,
-                     email: user.email
+                     username: user.username
                   }
                   let token = jwt.sign(payload, process.env.SECRET_KEY, {
                      expiresIn: 1440
                   })
-                  res.send(token)
+                  res.status(200).send(token)
                } else {
                   // Passwords don't match
-                  res.json({ error: 'User does not exist' })
+                  res.status(400).json({ error: 'Wrong password' })
                }
             } else {
-               res.json({ error: 'User does not exist' })
+               res.status(400).json({ error: 'User does not exist' })
             }
          })
          .catch(err => {
@@ -102,9 +98,4 @@ module.exports = {
    async logout(req, res) {
    }
 
-
 };
-
-
-//temp
-// spostin, etunimen ja sukunimen tilalle vain käyttäjänimi

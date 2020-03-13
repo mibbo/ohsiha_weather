@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { login } from './UserFunctions'
 
+
 class Login extends Component {
    constructor() {
       super()
       this.state = {
-         email: '',
+         username: '',
          password: '',
          errors: {}
       }
@@ -21,13 +22,19 @@ class Login extends Component {
       e.preventDefault()
 
       const user = {
-         email: this.state.email,
+         username: this.state.username,
          password: this.state.password
       }
+      console.log(this.state);
+
 
       login(user).then(res => {
          if (res) {
             this.props.history.push(`/profile`)
+         } else {
+            console.log("errorii");
+            console.log(res);
+
          }
       })
    }
@@ -38,15 +45,15 @@ class Login extends Component {
             <div className="row">
                <div className="col-md-6 mt-5 mx-auto">
                   <form noValidate onSubmit={this.onSubmit}>
-                     <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+                     <h1 className="h3 mb-3 font-weight-normal">Login</h1>
                      <div className="form-group">
-                        <label htmlFor="email">Email address</label>
+                        <label htmlFor="username">Username</label>
                         <input
-                           type="email"
+                           type="text"
                            className="form-control"
-                           name="email"
-                           placeholder="Enter email"
-                           value={this.state.email}
+                           name="username"
+                           placeholder="Username"
+                           value={this.state.username}
                            onChange={this.onChange}
                         />
                      </div>

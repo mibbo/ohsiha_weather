@@ -2,10 +2,9 @@ import axios from 'axios'
 
 export const register = newUser => {
    return axios
+      //sends the body data to backend
       .post('users/register', {
-         first_name: newUser.first_name,
-         last_name: newUser.last_name,
-         email: newUser.email,
+         username: newUser.username,
          password: newUser.password
       })
       .then(response => {
@@ -16,7 +15,7 @@ export const register = newUser => {
 export const login = user => {
    return axios
       .post('users/login', {
-         email: user.email,
+         username: user.username,
          password: user.password
       })
       .then(response => {
