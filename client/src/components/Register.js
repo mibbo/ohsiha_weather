@@ -9,7 +9,7 @@ class Register extends Component {
       this.state = {
          username: '',
          password: '',
-         errors: {}
+         error: ''
       }
 
       this.onChange = this.onChange.bind(this)
@@ -18,35 +18,33 @@ class Register extends Component {
 
    onChange(e) {
       this.setState({ [e.target.name]: e.target.value })
+      this.setState({ error: '' })
    }
    onSubmit(e) {
       // prevents the page from realoading when the submit button is clicked
       e.preventDefault()
+
+      if (this.state.username === '' || this.state.password === '') {
+         this.setState({ error: 'field cannot be blank' })
+         return;
+      }
 
       const newUser = {
          username: this.state.username,
          password: this.state.password
       }
 
-      //tapa1: ilman userFunctionia
-      return axios
-         //sends the body data to backend and runs backend code
-         .post('users/register', {
-            username: newUser.username,
-            password: newUser.password
-         })
-         // If registering is succesful in backend, switches to login screen
-         .then(response => {
-            console.log('Registered')
+      register(newUser).then(status => {
+         if (status === 'success') {
             this.props.history.push(`/login`)
-         })
-      // tapa2: userFunctionin kanssa
-      // register(newUser).then(res => {
-      //    this.props.history.push(`/login`)
-      // })
+         } else {
+            this.setState({ error: status })
+         }
+      })
    }
 
    render() {
+      const { username, password, error } = this.state
       return (
          <div className="container">
             <div className="row">
@@ -60,7 +58,7 @@ class Register extends Component {
                            className="form-control"
                            name="username"
                            placeholder="Enter username"
-                           value={this.state.username}
+                           value={username}
                            onChange={this.onChange}
                         />
                      </div>
@@ -71,7 +69,7 @@ class Register extends Component {
                            className="form-control"
                            name="password"
                            placeholder="Password"
-                           value={this.state.password}
+                           value={password}
                            onChange={this.onChange}
                         />
                      </div>
@@ -80,6 +78,9 @@ class Register extends Component {
                         className="btn btn-lg btn-primary btn-block">
                         Register
               </button>
+                     <span>
+                        {error}
+                     </span>
                   </form>
                </div>
             </div>

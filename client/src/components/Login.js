@@ -8,7 +8,7 @@ class Login extends Component {
       this.state = {
          username: '',
          password: '',
-         errors: {}
+         error: ''
       }
 
       this.onChange = this.onChange.bind(this)
@@ -17,6 +17,7 @@ class Login extends Component {
 
    onChange(e) {
       this.setState({ [e.target.name]: e.target.value })
+      this.setState({ error: '' })
    }
    onSubmit(e) {
       e.preventDefault()
@@ -27,19 +28,19 @@ class Login extends Component {
       }
       console.log(this.state);
 
-
-      login(user).then(res => {
-         if (res) {
-            this.props.history.push(`/profile`)
+      login(user).then(status => {
+         if (status === 'Wrong password') {
+            this.setState({ error: status })
+         } else if (status === 'User does not exist') {
+            this.setState({ error: status })
          } else {
-            console.log("errorii");
-            console.log(res);
-
+            this.props.history.push(`/profile`)
          }
       })
    }
 
    render() {
+      const { username, password, error } = this.state
       return (
          <div className="container">
             <div className="row">
@@ -53,7 +54,7 @@ class Login extends Component {
                            className="form-control"
                            name="username"
                            placeholder="Username"
-                           value={this.state.username}
+                           value={username}
                            onChange={this.onChange}
                         />
                      </div>
@@ -64,16 +65,18 @@ class Login extends Component {
                            className="form-control"
                            name="password"
                            placeholder="Password"
-                           value={this.state.password}
+                           value={password}
                            onChange={this.onChange}
                         />
                      </div>
                      <button
                         type="submit"
-                        className="btn btn-lg btn-primary btn-block"
-                     >
+                        className="btn btn-lg btn-primary btn-block">
                         Sign in
                      </button>
+                     <span>
+                        {error}
+                     </span>
                   </form>
                </div>
             </div>

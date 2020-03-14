@@ -29,15 +29,16 @@ module.exports = {
                   userData.password = hash
                   User.create(userData)
                      .then(user => {
-                        res.json({ status: user.username + 'Registered!' })
+                        res.json({ status: 'Registered!' })
                      })
                      .catch(err => {
-                        res.send('error: ' + err)
                         res.json({ error: 'User already exists' })
+                        console.log('catch error');
                      })
                })
             } else {
                res.json({ error: 'User already exists' })
+               console.log('user exists');
             }
          })
          .catch(err => {
@@ -61,13 +62,16 @@ module.exports = {
                   let token = jwt.sign(payload, process.env.SECRET_KEY, {
                      expiresIn: 1440
                   })
-                  res.status(200).send(token)
+                  res.send(token)
+                  console.log("token");
                } else {
                   // Passwords don't match
-                  res.status(400).json({ error: 'Wrong password' })
+                  res.json({ error: 'Wrong password' })
+                  console.log('wrong password');
                }
             } else {
-               res.status(400).json({ error: 'User does not exist' })
+               res.json({ error: 'User does not exist' })
+               console.log('user does not exist');
             }
          })
          .catch(err => {

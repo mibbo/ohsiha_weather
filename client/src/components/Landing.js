@@ -32,7 +32,6 @@ class Landing extends Component {
             </section>
          </div>
       )
-
    }
 }
 

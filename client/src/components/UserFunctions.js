@@ -8,7 +8,14 @@ export const register = newUser => {
          password: newUser.password
       })
       .then(response => {
-         console.log('Registered')
+         console.log(response);
+         if (response.data.status === 'Registered!') {
+            return 'success';
+         } else if (response.data.error === 'User already exists') {
+            return 'User already exists'
+         } else {
+            return 'error'
+         }
       })
 }
 
@@ -19,8 +26,13 @@ export const login = user => {
          password: user.password
       })
       .then(response => {
-         localStorage.setItem('usertoken', response.data)
-         return response.data
+         console.log(response);
+         if (response.data.error) {
+            return response.data.error
+         } else {
+            localStorage.setItem('usertoken', response.data)
+            return response.data
+         }
       })
       .catch(err => {
          console.log(err)
