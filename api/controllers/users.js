@@ -90,7 +90,7 @@ module.exports = {
             if (user) {
                res.json(user)
             } else {
-               res.send('User does not exist')
+               res.json({ error: 'Please login' })
             }
          })
          .catch(err => {

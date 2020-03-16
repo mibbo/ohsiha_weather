@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
-import axios from 'axios'
 
 
 class Register extends Component {

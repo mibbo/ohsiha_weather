@@ -39,13 +39,14 @@ export const login = user => {
       })
 }
 
-export const getProfile = user => {
+export const getProfile = token => {
    return axios
       .get('users/profile', {
-         //headers: { Authorization: ` ${this.getToken()}` }
+         headers: { Authorization: ` ${token}` }
       })
       .then(response => {
          console.log(response)
+         console.log(response.data);
          return response.data
       })
       .catch(err => {
