@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import jwt_decode from 'jwt-decode'
+//import jwt_decode from 'jwt-decode'
 import { getProfile } from './UserFunctions'
 
 class Profile extends Component {
@@ -7,7 +7,7 @@ class Profile extends Component {
       super()
       this.state = {
          username: '',
-         errors: {}
+         errors: ''
       }
    }
 

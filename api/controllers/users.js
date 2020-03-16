@@ -1,12 +1,8 @@
 const User = require('../models/User')
 
-const express = require('express');
-const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
-const users = express.Router();
-users.use(cors());
 
 process.env.SECRET_KEY = 'secret';
 

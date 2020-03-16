@@ -53,3 +53,16 @@ export const getProfile = token => {
          console.log(err)
       })
 }
+
+export const getWeather = data => {
+   console.log('getWeather');
+   return axios
+      //saa tarvittavat datat json muodossa
+      .get('weather/zip', {
+         headers: { zipcode: ` ${data}` }
+      })
+      .then(response => {
+         console.log('asdasd');
+         console.log(response);
+      })
+}

@@ -33,13 +33,14 @@ class Register extends Component {
          password: this.state.password
       }
 
-      register(newUser).then(status => {
-         if (status === 'success') {
-            this.props.history.push(`/login`)
-         } else {
-            this.setState({ error: status })
-         }
-      })
+      register(newUser)
+         .then(status => {
+            if (status === 'success') {
+               this.props.history.push(`/login`)
+            } else {
+               this.setState({ error: status })
+            }
+         })
    }
 
    render() {

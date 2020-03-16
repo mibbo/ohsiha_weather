@@ -23,9 +23,14 @@ mongoose
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err))
 
-var Users = require('./routes/users')
+// send app to router
+// require('./router.js')(app);
+var WeatherRouter = require('./routes/weather')
 
-app.use('/users', Users)
+var UsersRouter = require('./routes/users')
+
+app.use('/weather', WeatherRouter)
+app.use('/users', UsersRouter)
 
 app.listen(port, function () {
   console.log('Server is running on port: ' + port)
