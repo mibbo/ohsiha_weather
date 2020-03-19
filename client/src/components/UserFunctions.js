@@ -62,7 +62,11 @@ export const getWeather = data => {
          headers: { zipcode: ` ${data}` }
       })
       .then(response => {
-         console.log('asdasd');
-         console.log(response);
+         if (response.status === 200) {
+            return response;
+         }
+      })
+      .catch(err => {
+         console.log(err)
       })
 }
