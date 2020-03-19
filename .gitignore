@@ -10,6 +10,7 @@ node_modules_info
 node_modulse_info.kate-swp
 package-lock.json
 
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
