@@ -58,8 +58,41 @@ export const getWeather = data => {
    console.log('getWeather');
    return axios
       //saa tarvittavat datat json muodossa
-      .get('weather/zip', {
+      .get('weather/zipWeather', {
          headers: { zipcode: ` ${data}` }
+      })
+      .then(response => {
+         if (response.status === 200) {
+            return response;
+         }
+      })
+      .catch(err => {
+         console.log(err)
+      })
+}
+
+export const getRoomTemp = data => {
+   return axios
+      //saa tarvittavat datat json muodossa
+      .get('weather/roomTemp', {
+         headers: { sensorID: ` ${data}` }
+      })
+      .then(response => {
+         if (response === null) { return ''; } //testaa vielä mitä pitäisi palauttaa jos liikaa requesteja kuukauden aikana
+         if (response.status === 200) {
+            return response;
+         }
+      })
+      .catch(err => {
+         console.log(err)
+      })
+}
+
+export const getRoomTempHistory = data => {
+   return axios
+      //saa tarvittavat datat json muodossa
+      .get('weather/roomTempHistory', {
+         headers: { sensorID: ` ${data}` }
       })
       .then(response => {
          if (response.status === 200) {

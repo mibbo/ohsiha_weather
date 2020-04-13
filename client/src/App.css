@@ -24,9 +24,13 @@
 body {
  margin: 0
 }
-.cards {
- min-height: 100vh;
+.card--weather{
+  min-height: 10vh;
+  height: 250px;
 }
+.card--egain{
+  min-height: 70vh;
+ }
 .card {
  margin: 12px; 
  margin-top: 50px;
