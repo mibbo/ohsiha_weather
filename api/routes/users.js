@@ -1,25 +1,23 @@
 const express = require('express');
 const cors = require('cors');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-
-const users = express.Router();
+const router = express.Router();
+router.use(cors());
 const UserController = require('../controllers/users');
-users.use(cors());
+
 
 process.env.SECRET_KEY = 'secret';
 
 
 // Register user
-users.post('/register', UserController.register);
+router.post('/register', UserController.register);
 
 // Login user
-users.post('/login', UserController.login);
+router.post('/login', UserController.login);
 
 // View profile
-users.get('/profile', UserController.profile);
+router.get('/profile', UserController.profile);
 
 // Logout
-users.get('/logout', UserController.logout);
+router.get('/logout', UserController.logout);
 
-module.exports = users;
+module.exports = router;
