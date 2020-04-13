@@ -51,15 +51,15 @@ class Landing extends Component {
             console.log(res);
 
             this.setState({
-               roomTemperature: res.data.temperature,
-               roomHumidity: res.data.humidity
+               roomTemperature: res.data.Temp,
+               roomHumidity: res.data.Humidity
             })
          })
    }
 
 
    render() {
-      const { temperature, location, feelsLike, error } = this.state
+      const { temperature, location, feelsLike, roomTemperature, roomHumidity, error } = this.state
       return (
          <div className="cards" >
             <section className="card card--weather">
@@ -68,11 +68,8 @@ class Landing extends Component {
                </header>
                <ul>
                   <li>{location}</li>
-                  <li>temp: {temperature} °C</li>
-                  <li>feels like: {feelsLike} °C</li>
-                  <li></li>
-                  <li></li>
-                  <li></li>
+                  <li>Temp: {temperature} °C</li>
+                  <li>Feels like: {feelsLike}°C</li>
                </ul>
                <button></button>
             </section>
@@ -81,9 +78,8 @@ class Landing extends Component {
                   <h1 className="text-center">egain</h1>
                </header>
                <ul>
-                  <li></li>
-                  <li></li>
-                  <li></li>
+                  <li>Apartment temperature: {roomTemperature} °C</li>
+                  <li>Apartment humidity: {roomHumidity} % </li>
                </ul>
                <button></button>
             </section>

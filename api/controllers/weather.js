@@ -41,7 +41,9 @@ module.exports = {
          .send("guid=63558404-EDD4-49DD-AE9F-5BFB5FD5BC4D")
          .end(function (res) {
             if (res.error) throw new Error(res.error);
-            console.log(res.raw_body);
+            var data = JSON.parse(res.raw_body);
+            console.log(data.SensorInfo);
+            response.json(data.SensorInfo)
          });
 
    },
@@ -59,7 +61,9 @@ module.exports = {
          .send('guid=63558404-EDD4-49DD-AE9F-5BFB5FD5BC4D')
          .end(function (res) {
             if (res.error) throw new Error(res.error);
-            console.log(res.raw_body);
+            var data = JSON.parse(res.raw_body);
+            console.log(data.SensorInfo);
+            response.json(data)
          });
    }
 }
