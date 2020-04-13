@@ -58,8 +58,25 @@ export const getWeather = data => {
    console.log('getWeather');
    return axios
       //saa tarvittavat datat json muodossa
-      .get('weather/zip', {
+      .get('weather/zipWeather', {
          headers: { zipcode: ` ${data}` }
+      })
+      .then(response => {
+         if (response.status === 200) {
+            return response;
+         }
+      })
+      .catch(err => {
+         console.log(err)
+      })
+}
+
+export const getEgain = data => {
+   console.log('getEgain');
+   return axios
+      //saa tarvittavat datat json muodossa
+      .get('weather/roomTemp', {
+         headers: { sensorID: ` ${data}` }
       })
       .then(response => {
          if (response.status === 200) {

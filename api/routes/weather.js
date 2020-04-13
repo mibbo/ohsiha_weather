@@ -4,8 +4,8 @@ const router = express.Router();
 router.use(cors());
 const WeatherController = require('../controllers/weather');
 
+router.get('/zipWeather', WeatherController.zip);
+router.get('/roomTemp', WeatherController.roomTemp);
 
-
-router.get('/zip', WeatherController.show);
 
 module.exports = router;

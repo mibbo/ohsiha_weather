@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getWeather } from './UserFunctions'
+import { getWeather, getEgain } from './UserFunctions'
 
 
 class Landing extends Component {
@@ -9,6 +9,8 @@ class Landing extends Component {
          location: '',
          temperature: '',
          feelsLike: '',
+         roomTemperature: '',
+         roomHumidity: '',
          error: ''
       }
       this.onChange = this.onChange.bind(this)
@@ -25,7 +27,7 @@ class Landing extends Component {
          .then(res => {
             console.log('then data');
             if (!res) {
-               this.setState({ error: 'error when fetching data' })
+               this.setState({ error: 'error while fetching data' })
                return;
             }
             console.log(res);
@@ -35,6 +37,22 @@ class Landing extends Component {
                location: res.data.name,
                temperature: res.data.main.temp,
                feelsLike: res.data.main.feels_like
+            })
+         })
+
+      getEgain('40020853')
+         .then(res => {
+            console.log('frontend egain');
+            if (!res) {
+               this.setState({ error: 'error while fetching data' })
+               console.log(this.state.error);
+               return;
+            }
+            console.log(res);
+
+            this.setState({
+               roomTemperature: res.data.temperature,
+               roomHumidity: res.data.humidity
             })
          })
    }

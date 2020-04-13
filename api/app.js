@@ -24,12 +24,15 @@ mongoose
   .catch(err => console.log(err))
 
 // send app to router
-// require('./router.js')(app);
-var UsersRouter = require('./routes/users')
-var WeatherRouter = require('./routes/weather')
+require('./router.js')(app);
+// var UsersRouter = require('./routes/users')
+// var WeatherRouter = require('./routes/weather')
+// var EgainRouter = require('./routes/egain')
 
-app.use('/users', UsersRouter)
-app.use('/weather', WeatherRouter)
+// app.use('/users', UsersRouter)
+// app.use('/weather', WeatherRouter)
+// app.use('/egain', EgainRouter)
+
 
 app.listen(port, function () {
   console.log('Server is running on port: ' + port)
