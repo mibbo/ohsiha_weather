@@ -1,21 +1,19 @@
 import React, { Component, Fragment } from 'react'
 import { getWeather, getRoomTemp, getRoomTempHistory } from './UserFunctions'
 
+import WeekContainer from './WeekContainer';
 
 class Landing extends Component {
    constructor() {
       super()
       this.state = {
          location: '',
+         country: '',
          temperature: '',
          feelsLike: '',
          roomTemperature: '',
          roomHumidity: '',
          roomHistoryData: [],
-         userData: [
-            { id: '1', name: 'Joe', user_type: 'Developer' },
-            { id: '2', name: 'Hill', user_type: 'Designer' }
-         ],
          error: ''
       }
       this.onChange = this.onChange.bind(this)
@@ -27,19 +25,18 @@ class Landing extends Component {
    }
 
    componentDidMount() {
-      console.log('componentDidMount');
       getWeather('33720')
          .then(res => {
             console.log('then data');
             if (!res) {
-               this.setState({ error: 'error while fetching data' })
+               this.setState({ error: 'error while fetching weather data' })
                return;
             }
             console.log(res);
-            console.log(res.data.name);
 
             this.setState({
                location: res.data.name,
+               country: res.data.sys.country,
                temperature: res.data.main.temp,
                feelsLike: res.data.main.feels_like
             })
@@ -47,9 +44,8 @@ class Landing extends Component {
 
       getRoomTemp('40020853')
          .then(res => {
-            console.log('frontend egain');
-            if (!res) {
-               this.setState({ error: 'error while fetching data' })
+            if (res.data === null) { // !res
+               this.setState({ error: 'error while fetching apartment temperature data' })
                console.log(this.state.error);
                return;
             }
@@ -63,8 +59,8 @@ class Landing extends Component {
 
       getRoomTempHistory('40020853')
          .then(res => {
-            if (!res) {
-               this.setState({ error: 'error while fetching data' })
+            if (res.data === null) { // !res
+               this.setState({ error: 'error while fetching apartment temperature history data' })
                console.log(this.state.error);
                return;
             }
@@ -74,13 +70,8 @@ class Landing extends Component {
             console.log(" ");
             console.log("modattu response");
             console.log(this.state.roomHistoryData);
-            console.log(this.state.userData);
          })
    }
-
-   deleteUser = id => {
-      // delete operation to remove item
-   };
 
    renderItems = () => {
       const data = this.state.roomHistoryData;
@@ -92,10 +83,6 @@ class Landing extends Component {
                <span>{item.Date}</span>
                <span> - {item.Temp}°C</span>
                <span> - {item.Hum}%</span>
-
-               {/* <button onClick={() => this.deleteUser(item.id)}>
-                  Delete User
-                  </button> */}
             </li>
          </Fragment>
       ));
@@ -104,32 +91,39 @@ class Landing extends Component {
 
 
    render() {
-      const { temperature, location, feelsLike, roomTemperature, roomHumidity, roomHistoryData, error } = this.state
+      const { temperature, location, country, feelsLike, roomTemperature, roomHumidity, roomHistoryData, error } = this.state
       return (
          <div className="cards" >
             <section className="card card--weather">
                <header>
                   <h1 className="text-center">Weather</h1>
                </header>
+               <span>
+                  {error}
+               </span>
                <ul>
-                  <li>{location}</li>
-                  <li>Temp: {temperature} °C</li>
-                  <li>Feels like: {feelsLike} °C</li>
+                  <li id='location'>{location}, {country}</li>
+                  <li id='temp'>{Math.round(temperature)}<sup>°C</sup></li>
+                  <li id='feels'>Feels like {Math.round(feelsLike)} °C</li>
+                  <li></li>
+                  <li id="line"></li>
+                  <li id="daily">Daily</li>
+
                </ul>
-               <button></button>
+               <div className="App">
+                  <WeekContainer location={location} />
+               </div>
             </section>
             <section className="card card--egain">
                <header>
-                  <h1 className="text-center">egain</h1>
+                  <h1 className="text-center">Apartment</h1>
                </header>
                <ul>
-                  <li>Apartment temperature: {roomTemperature} °C</li>
-                  <li>Apartment humidity: {roomHumidity} % </li>
+                  <li>Temperature: {roomTemperature} °C</li>
+                  <li>Humidity: {roomHumidity} % </li>
                </ul>
-
+               <h4 className="text-center">History</h4>
                <ul>{this.renderItems()}</ul>
-
-               <button></button>
             </section >
          </div >
       )

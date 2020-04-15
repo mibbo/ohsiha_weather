@@ -1,19 +1,22 @@
 /*
  = ======== flexbox ========
 */
+
 .cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  /* font-family: sans-serif; */
 }
 
 .card--weather {
-  flex: 0 0 700px;
+  flex: 0 0 1100px;
 
 }
 .card--egain {
   flex: 0 0 300px;
 }
+
 
 /*
 = ====== visuals =========
@@ -25,16 +28,84 @@ body {
  margin: 0
 }
 .card--weather{
-  min-height: 10vh;
-  height: 250px;
+  /* min-height: 40vh; */
+  height: 535px;
+  width: 0vh;
 }
-.card--egain{
-  min-height: 70vh;
+
+.card.card--weather > ul li {
+  height: 20px;
+  width: 90%;
+  margin: 10px auto;
+  text-align: center;
  }
+
+.card--egain{
+  /* min-height: 70vh; */
+  height: 535px;
+ }
+
+ /* ======= day card ========= */
+
+.card.card--day{
+  height: 205px;
+  width: 160px;
+  background: #d4eafd;
+  margin: 10px auto;
+}
+.card.card--day > header {
+  background: #9dd0ff;
+  height: 1000px;
+  border-radius:  7px 7px 0 0;
+ }
+
+.card.card--day > header > h4 {
+  margin-top: 7px;
+ }
+.card.card--day > ul li {
+  height: 20px;
+  width: 90%;
+  margin: 10px auto;
+  text-align: center;
+ }
+
+#li1 {
+  color: #7c7c7c;
+}
+#li2 {
+  font-size:30px;
+}
+/* ================ */
+
+
+#location {
+  color: #7c7c7c;
+}
+#temp {
+  font-size: 50px;
+  margin-bottom: 55px;
+}
+sup {
+  font-size: 30px;
+}
+#feels {
+  color: #7c7c7c;
+}
+#line {
+  background: #d9e4ee;
+  border-radius:  7px 7px 7px 7px;
+  height: 10px;
+}
+#daily {
+  text-align: left;
+  font-size: 30px;
+  margin-left: 110px;
+}
+
 .card {
  margin: 12px; 
  margin-top: 50px;
- background: #f2f2f2;
+ background: #e9f5ff;
  border-radius: 7px;
  padding: 0 0 50px 0;
  border: 0;
@@ -44,7 +115,7 @@ body {
 = ====== card inner components =========
 */
 .card > header {
- background: #b1d9ff;
+ background: #9dd0ff;
  height: 50px;
  border-radius:  7px 7px 0 0;
 }
@@ -56,7 +127,6 @@ body {
  height: 20px;
  width: 90%;
  margin: 10px auto;
- background: rgba(255,255,255, 0.4);
 }
 .card button {
  width: 120px;
