@@ -42,14 +42,14 @@ class Landing extends Component {
             })
          })
 
-      const token = localStorage.usertoken
-      console.log(token);
+      // const token = localStorage.usertoken            //tokenin säätö debugaus
+      // console.log(token);
 
-      getProfile(token)
-         .then(res => {
-            console.log("landing tokenin sisältö:");
-            console.log(res);
-         })
+      // getProfile(token)
+      //    .then(res => {
+      //       console.log("landing tokenin sisältö:");
+      //       console.log(res);
+      //    })
 
       getRoomTemp('40020853')
          .then(res => {

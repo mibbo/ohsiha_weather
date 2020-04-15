@@ -23,6 +23,12 @@ class Profile extends Component {
    onSubmit(e) {
       e.preventDefault()
 
+      //TODO
+      //
+      // lähetä uusi zip koodi (ja käyttäjätunnus?) backendiin, vaihda kyseisen käyttäjän zip koodi 
+      // luultavasti pitää myös vaihtaa tokenista zip koodi, jotta se vaihtuu 
+      // käyttäjän nykyiselle kirjautumissessiolle
+
    }
 
    componentDidMount() {
@@ -31,8 +37,9 @@ class Profile extends Component {
       // this.setState({
       // username: decoded.username
       getProfile(token).then(res => {
-         console.log("tokenin sisältö:");
+         console.log("tokenin sisältö:");           //tokenin tarkistus debugaus  
          console.log(res);
+
          this.setState({
             username: res.username
          })
