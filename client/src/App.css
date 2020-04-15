@@ -101,6 +101,15 @@ sup {
   font-size: 30px;
   margin-left: 110px;
 }
+#change-location-input {
+  margin-left: 10px;
+  width: 130px;
+}
+#zip-button {
+  margin-left: 10px;
+  margin-top: 5px;
+  width: 130px;
+}
 
 .card {
  margin: 12px; 

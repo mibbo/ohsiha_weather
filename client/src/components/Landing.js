@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { getWeather, getRoomTemp, getRoomTempHistory } from './UserFunctions'
+import { getWeather, getRoomTemp, getRoomTempHistory, getProfile } from './UserFunctions'
 
 import WeekContainer from './WeekContainer';
 
@@ -42,6 +42,15 @@ class Landing extends Component {
             })
          })
 
+      const token = localStorage.usertoken
+      console.log(token);
+
+      getProfile(token)
+         .then(res => {
+            console.log("landing tokenin sisältö:");
+            console.log(res);
+         })
+
       getRoomTemp('40020853')
          .then(res => {
             if (res.data === null) { // !res
@@ -56,6 +65,7 @@ class Landing extends Component {
                roomHumidity: res.data.Humidity
             })
          })
+
 
       getRoomTempHistory('40020853')
          .then(res => {

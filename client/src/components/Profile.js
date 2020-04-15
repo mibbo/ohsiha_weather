@@ -7,8 +7,22 @@ class Profile extends Component {
       super()
       this.state = {
          username: '',
-         errors: ''
+         location: '',
+         zip: '',
+         error: ''
       }
+
+      this.onChange = this.onChange.bind(this)
+      this.onSubmit = this.onSubmit.bind(this)
+   }
+
+   onChange(e) {
+      this.setState({ [e.target.name]: e.target.value })
+      this.setState({ error: '' })
+   }
+   onSubmit(e) {
+      e.preventDefault()
+
    }
 
    componentDidMount() {
@@ -17,27 +31,62 @@ class Profile extends Component {
       // this.setState({
       // username: decoded.username
       getProfile(token).then(res => {
+         console.log("tokenin sisältö:");
+         console.log(res);
          this.setState({
             username: res.username
          })
       })
+
    }
 
    render() {
+      const { username, location, zip, error } = this.state
       return (
          <div className="container" >
             <div className="jumbotron mt-5">
                <div className="col-sm-8 mx-auto">
                   <h1 className="text-center">PROFILE</h1>
                </div>
-               <table className="table col-md-6 mx-auto">
-                  <tbody>
-                     <tr>
-                        <td>Username</td>
-                        <td>{this.state.username}</td>
-                     </tr>
-                  </tbody>
-               </table>
+               <form noValidate onSubmit={this.onSubmit}>
+
+                  <table className="table col-md-6 mx-auto">
+                     <tbody>
+                        <tr>
+                           <td>Username</td>
+                           <td>{username}</td>
+                        </tr>
+                        <tr>
+                           <td>Location</td>
+                           <td>{location}</td>
+                        </tr>
+                        <tr>
+                           <td>Zip-code</td>
+                           <td>{zip}</td>
+                        </tr>
+                        <div>
+                           <input
+                              id="change-location-input"
+                              type="text"
+                              className="form-control"
+                              placeholder="Enter zip code"
+                              value={this.state.value}
+                              onChange={this.onChange}
+                           />
+                        </div>
+                        <button
+                           id="zip-button"
+                           type="submit"
+                           className="btn btn-lg btn-primary btn-block">
+                           Change zip
+                     </button>
+                        <span>
+                           {error}
+                        </span>
+                     </tbody>
+                  </table>
+               </form>
+
             </div>
          </div>
       )
