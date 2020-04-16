@@ -33,20 +33,25 @@ class Profile extends Component {
       // samalla saa zipin vastaavan locaation
 
 
+      //hakee tokenin -> TODO:landing sivulle automaattinen api haku käyttäjän mongon zipistä
+
       //TODO
       //
       // lähetä uusi zip koodi (ja käyttäjätunnus?) backendiin, vaihda kyseisen käyttäjän zip koodi 
-      // luultavasti pitää myös vaihtaa tokenista zip koodi, jotta se vaihtuu 
-      // käyttäjän nykyiselle kirjautumissessiolle
-      // changeUserData(user).then(status => {
-      //    if (status === 'Wrong password') {
-      //       this.setState({ error: status })
-      //    } else if (status === 'User does not exist') {
-      //       this.setState({ error: status })
-      //    } else {
-      //       //this.props.history.push(`/profile`)
-      //    }
-      // })
+
+      const data = {
+         username: this.state.username,
+         zip: this.state.zip
+      }
+      changeUserData(data).then(status => {
+         if (status === 'Wrong password') {
+            this.setState({ error: status })
+         } else if (status === 'User does not exist') {
+            this.setState({ error: status })
+         } else {
+            //this.props.history.push(`/profile`)
+         }
+      })
    }
 
    componentDidMount() {
@@ -55,9 +60,6 @@ class Profile extends Component {
       // this.setState({
       // username: decoded.username
       getProfile(token).then(res => {
-         console.log("tokenin sisältö:");           //tokenin tarkistus debugaus  
-         console.log(res);
-
          this.setState({
             username: res.username
          })

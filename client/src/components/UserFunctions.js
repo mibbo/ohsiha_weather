@@ -54,10 +54,12 @@ export const getProfile = token => {
       })
 }
 
-export const changeUserData = user => {
+export const changeUserData = data => {
+   console.log('changeUserData');
    return axios
-      .get('users/changeUserData', {
-         username: user.username,
+      .post('users/changeUserData', {
+         username: data.username,
+         zip: data.zip
       })
       .then(response => {           //jos kaikki ok ja vaihtanut backendissä uuden zipcoden mongoon, niin saa 
          console.log(response)

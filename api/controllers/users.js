@@ -12,6 +12,7 @@ module.exports = {
       const userData = {
          username: req.body.username,
          password: req.body.password,
+         zipcode: '',
          created: today
       }
 
@@ -94,18 +95,50 @@ module.exports = {
    },
 
    async changeUserData(req, res) {
+      console.log("adasdasdasdasdasd");
+
+      console.log(req.body.username + ' - ' + req.body.zip);
+
+      User.findOne({
+         username: req.body.username
+      })
+      // User.findOneAndUpdate(
+      //    { "name": req.body.username },
+      //    { $pull: { zipcode: req.body.zip } },
+      //    { upsert: false, new: true },
+      // )
+
+      User.findOneAndUpdate(
+         { username: req.body.username },
+         { $set: { zipcode: req.body.zip } },
+         { upsert: true }, function (err, doc) {
+            if (err) { throw err; }
+            else {
+               console.log("zipcode updated");
+            }
+         });
+
+      User.findOne(
+         { username: req.body.username },
+         function (err, doc) {
+            if (err) { throw err; }
+            else {
+               console.log("found");
+               console.log(doc.zipcode);
+            }
+         });
       //saa käyttäjätunnuksen ja zip koodin
 
       //asettaa uuden ziplocationin kyseisen käyttäjän mongoon
 
       //lähettää statuksen OK/ERROR
 
-      const userData = {
-         zipcode: req.body.zipcode
-      }
-      User.findOne({
-         _id: decoded._id
-      })
+      // const userData = {
+      //    zipcode: req.body.zipcode
+      // }
+      // User.findOne({
+      //    _id: decoded._id
+      // })
    },
 
 

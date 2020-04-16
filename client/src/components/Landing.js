@@ -25,7 +25,7 @@ class Landing extends Component {
    }
 
    componentDidMount() {
-      getWeather('33720')
+      getWeather('33720') //TODO:landing sivulle automaattinen api haku käyttäjän mongon zipistä
          .then(res => {
             console.log('then data');
             if (!res) {
