@@ -13,6 +13,7 @@ class Landing extends Component {
          country: '',
          temperature: '',
          feelsLike: '',
+         icon: '',
          roomTemperature: '',
          roomHumidity: '',
          roomHistoryData: [],
@@ -72,7 +73,8 @@ class Landing extends Component {
                location: res.data.name,
                country: res.data.sys.country,
                temperature: res.data.main.temp,
-               feelsLike: res.data.main.feels_like
+               feelsLike: res.data.main.feels_like,
+               icon: res.data.weather[0].icon
             })
          })
       }
@@ -130,7 +132,7 @@ class Landing extends Component {
 
 
    render() {
-      const { temperature, location, zip, country, feelsLike, roomTemperature, roomHumidity, roomHistoryData, error } = this.state
+      const { temperature, location, zip, country, feelsLike, icon, roomTemperature, roomHumidity, roomHistoryData, error } = this.state
       return (
          <div className="cards" >
             <section className="card card--weather">
@@ -142,7 +144,7 @@ class Landing extends Component {
                </span>
                <ul>
                   <li id='location'>{location}, {zip}, {country}</li>
-                  <li id='temp'>{Math.round(temperature)}<sup>°C</sup></li>
+                  <li id='temp'><sup><img src={'http://openweathermap.org/img/wn/' + icon + '@2x.png'} /></sup>{Math.round(temperature)}<sup>°C</sup></li>
                   <li id='feels'>Feels like {Math.round(feelsLike)} °C</li>
                   <li></li>
                   <li id="line"></li>
