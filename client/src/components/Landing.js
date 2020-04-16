@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { getWeather, getRoomTemp, getRoomTempHistory, getProfile } from './UserFunctions'
+import { getWeather, getRoomTemp, getRoomTempHistory, getProfile, getUserZip } from './UserFunctions'
 
 import WeekContainer from './WeekContainer';
 
@@ -7,7 +7,9 @@ class Landing extends Component {
    constructor() {
       super()
       this.state = {
+         username: '',
          location: '',
+         zip: '',
          country: '',
          temperature: '',
          feelsLike: '',
@@ -25,8 +27,40 @@ class Landing extends Component {
    }
 
    componentDidMount() {
-      getWeather('33720') //TODO:landing sivulle automaattinen api haku käyttäjän mongon zipistä
-         .then(res => {
+      const token = localStorage.usertoken
+
+
+
+      //jos käyttäjä kirjautunut niin hakee käyttäjäkohtaisen säädatan
+      if (localStorage.usertoken) {
+         getProfile(token).then(res => {
+            this.setState({
+               username: res.username
+            })
+            getUserZip(res.username).then(status => {
+               var userZip = status
+               this.setState({
+                  zip: userZip
+               })
+               getWeather(userZip).then(res => {
+                  console.log('then data');
+                  if (!res) {
+                     this.setState({ error: 'error while fetching weather data' })
+                     return;
+                  }
+                  this.setState({
+                     location: res.data.name,
+                     country: res.data.sys.country,
+                     temperature: res.data.main.temp,
+                     feelsLike: res.data.main.feels_like
+                  })
+               })
+
+            })
+         })
+         //käyttjä ei ole kirjautunut -> hakee hervannan sään
+      } else {
+         getWeather('33720').then(res => {
             console.log('then data');
             if (!res) {
                this.setState({ error: 'error while fetching weather data' })
@@ -41,15 +75,9 @@ class Landing extends Component {
                feelsLike: res.data.main.feels_like
             })
          })
+      }
 
-      // const token = localStorage.usertoken            //tokenin säätö debugaus
-      // console.log(token);
 
-      // getProfile(token)
-      //    .then(res => {
-      //       console.log("landing tokenin sisältö:");
-      //       console.log(res);
-      //    })
 
       getRoomTemp('40020853')
          .then(res => {
@@ -84,8 +112,9 @@ class Landing extends Component {
    }
 
    renderItems = () => {
-      const data = this.state.roomHistoryData;
+      console.log('zippi korttiin: ' + this.state.zip);
 
+      const data = this.state.roomHistoryData;
       const mapRows = data.map((item, index) => (
          <Fragment key={item.id}>
             <li>
@@ -101,7 +130,7 @@ class Landing extends Component {
 
 
    render() {
-      const { temperature, location, country, feelsLike, roomTemperature, roomHumidity, roomHistoryData, error } = this.state
+      const { temperature, location, zip, country, feelsLike, roomTemperature, roomHumidity, roomHistoryData, error } = this.state
       return (
          <div className="cards" >
             <section className="card card--weather">
@@ -112,7 +141,7 @@ class Landing extends Component {
                   {error}
                </span>
                <ul>
-                  <li id='location'>{location}, {country}</li>
+                  <li id='location'>{location}, {zip}, {country}</li>
                   <li id='temp'>{Math.round(temperature)}<sup>°C</sup></li>
                   <li id='feels'>Feels like {Math.round(feelsLike)} °C</li>
                   <li></li>
