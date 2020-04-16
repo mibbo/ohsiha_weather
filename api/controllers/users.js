@@ -93,6 +93,21 @@ module.exports = {
          })
    },
 
+   async changeUserData(req, res) {
+      //saa käyttäjätunnuksen ja zip koodin
+
+      //asettaa uuden ziplocationin kyseisen käyttäjän mongoon
+
+      //lähettää statuksen OK/ERROR
+
+      const userData = {
+         zipcode: req.body.zipcode
+      }
+      User.findOne({
+         _id: decoded._id
+      })
+   },
+
 
    async logout(req, res) {
    }

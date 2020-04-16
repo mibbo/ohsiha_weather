@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 //import jwt_decode from 'jwt-decode'
-import { getProfile } from './UserFunctions'
+import { getProfile, changeUserData } from './UserFunctions'
 
 class Profile extends Component {
    constructor() {
@@ -8,6 +8,7 @@ class Profile extends Component {
       this.state = {
          username: '',
          location: '',
+         staticZip: '',
          zip: '',
          error: ''
       }
@@ -22,13 +23,30 @@ class Profile extends Component {
    }
    onSubmit(e) {
       e.preventDefault()
+      console.log(this.state);
+
+      this.setState({
+         staticZip: this.state.zip
+      })
+
+      // TÄHÄN tarkistaa onko zippiä olemassa, jos ei niin ei vaihda sitä
+      // samalla saa zipin vastaavan locaation
+
 
       //TODO
       //
       // lähetä uusi zip koodi (ja käyttäjätunnus?) backendiin, vaihda kyseisen käyttäjän zip koodi 
       // luultavasti pitää myös vaihtaa tokenista zip koodi, jotta se vaihtuu 
       // käyttäjän nykyiselle kirjautumissessiolle
-
+      // changeUserData(user).then(status => {
+      //    if (status === 'Wrong password') {
+      //       this.setState({ error: status })
+      //    } else if (status === 'User does not exist') {
+      //       this.setState({ error: status })
+      //    } else {
+      //       //this.props.history.push(`/profile`)
+      //    }
+      // })
    }
 
    componentDidMount() {
@@ -45,10 +63,11 @@ class Profile extends Component {
          })
       })
 
+
    }
 
    render() {
-      const { username, location, zip, error } = this.state
+      const { username, location, staticZip, zip, error } = this.state
       return (
          <div className="container" >
             <div className="jumbotron mt-5">
@@ -56,7 +75,6 @@ class Profile extends Component {
                   <h1 className="text-center">PROFILE</h1>
                </div>
                <form noValidate onSubmit={this.onSubmit}>
-
                   <table className="table col-md-6 mx-auto">
                      <tbody>
                         <tr>
@@ -69,21 +87,23 @@ class Profile extends Component {
                         </tr>
                         <tr>
                            <td>Zip-code</td>
-                           <td>{zip}</td>
+                           <td>{staticZip}</td>
                         </tr>
                         <div>
                            <input
                               id="change-location-input"
                               type="text"
                               className="form-control"
+                              name="zip"
                               placeholder="Enter zip code"
-                              value={this.state.value}
+                              value={this.state.zip}
                               onChange={this.onChange}
                            />
                         </div>
                         <button
                            id="zip-button"
                            type="submit"
+                           value="Submit"
                            className="btn btn-lg btn-primary btn-block">
                            Change zip
                      </button>

@@ -54,6 +54,25 @@ export const getProfile = token => {
       })
 }
 
+export const changeUserData = user => {
+   return axios
+      .get('users/changeUserData', {
+         username: user.username,
+      })
+      .then(response => {           //jos kaikki ok ja vaihtanut backendissä uuden zipcoden mongoon, niin saa 
+         console.log(response)
+         console.log(response.data);
+
+         //localStorage.setItem('usertoken', response.data)    //tässä pitäs vaihtaa VAIN zipcode
+
+         return response.data
+      })
+      .catch(err => {
+         console.log(err)
+      })
+}
+
+
 export const getWeather = data => {
    console.log('getWeather');
    return axios

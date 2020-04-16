@@ -17,6 +17,9 @@ router.post('/login', UserController.login);
 // View profile
 router.get('/profile', UserController.profile);
 
+// Change user data (zip code)
+router.post('/prfile', UserController.changeUserData);
+
 // Logout
 router.get('/logout', UserController.logout);
 
