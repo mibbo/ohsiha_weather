@@ -53,7 +53,7 @@ class Landing extends Component {
 
       getRoomTemp('40020853')
          .then(res => {
-            if (res.data === null) { // !res
+            if (res === undefined || res.data === null) { // !res
                this.setState({ error: 'error while fetching apartment temperature data' })
                console.log(this.state.error);
                return;
@@ -69,8 +69,8 @@ class Landing extends Component {
 
       getRoomTempHistory('40020853')
          .then(res => {
-            if (res.data === null) { // !res
-               this.setState({ error: 'error while fetching apartment temperature history data' })
+            if (res === undefined || res.data === null) { // !res
+               this.setState({ error: 'error2 while fetching apartment temperature data' })
                console.log(this.state.error);
                return;
             }

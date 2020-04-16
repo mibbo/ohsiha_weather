@@ -95,19 +95,6 @@ module.exports = {
    },
 
    async changeUserData(req, res) {
-      console.log("adasdasdasdasdasd");
-
-      console.log(req.body.username + ' - ' + req.body.zip);
-
-      User.findOne({
-         username: req.body.username
-      })
-      // User.findOneAndUpdate(
-      //    { "name": req.body.username },
-      //    { $pull: { zipcode: req.body.zip } },
-      //    { upsert: false, new: true },
-      // )
-
       User.findOneAndUpdate(
          { username: req.body.username },
          { $set: { zipcode: req.body.zip } },
@@ -125,20 +112,32 @@ module.exports = {
             else {
                console.log("found");
                console.log(doc.zipcode);
+               res.send(doc.zipcode)
             }
          });
-      //saa käyttäjätunnuksen ja zip koodin
+   },
 
-      //asettaa uuden ziplocationin kyseisen käyttäjän mongoon
-
-      //lähettää statuksen OK/ERROR
-
-      // const userData = {
-      //    zipcode: req.body.zipcode
-      // }
-      // User.findOne({
-      //    _id: decoded._id
-      // })
+   async getUserZip(req, res) {
+      console.log('käyttäjätunnus: ' + req.headers['username']);
+      if (req.headers['username'] === undefined) {
+         console.log('no user logon');
+         res.send('33720')
+      } else {
+         User.findOne(
+            { username: req.headers['username'] },
+            function (err, doc) {
+               if (err) { throw err; }
+               else {
+                  if (doc.zipcode === null || doc.zipcode === undefined || doc.zipcode === '') {
+                     console.log('user zip not set');
+                     res.send('33720')
+                  } else {
+                     console.log('user zip: ' + doc.zipcode);
+                     res.send(doc.zipcode);
+                  }
+               }
+            });
+      }
    },
 
 

@@ -20,6 +20,9 @@ router.get('/profile', UserController.profile);
 // Change user data (zip code)
 router.post('/changeUserData', UserController.changeUserData);
 
+// Get user zip code
+router.get('/getUserZip', UserController.getUserZip);
+
 // Logout
 router.get('/logout', UserController.logout);
 

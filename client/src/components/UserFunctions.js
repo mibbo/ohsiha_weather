@@ -61,13 +61,31 @@ export const changeUserData = data => {
          username: data.username,
          zip: data.zip
       })
-      .then(response => {           //jos kaikki ok ja vaihtanut backendissä uuden zipcoden mongoon, niin saa 
-         console.log(response)
-         console.log(response.data);
+      .then(response => {
+         if (response.status === 200) {
+            console.log(response.data);
+            // palauttaa zip koodin stringinä
+            return response.data;
+         }
+      })
+      .catch(err => {
+         console.log(err)
+      })
+}
 
-         //localStorage.setItem('usertoken', response.data)    //tässä pitäs vaihtaa VAIN zipcode
-
-         return response.data
+export const getUserZip = data => {
+   console.log('getWeather');
+   return axios
+      //lähettää backendiin usernamen
+      .get('users/getUserZip', {
+         headers: { username: ` ${data}` }
+      })
+      .then(response => {
+         if (response.status === 200) {
+            console.log(response.data);
+            // palauttaa zip koodin stringinä
+            return response.data;
+         }
       })
       .catch(err => {
          console.log(err)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 //import jwt_decode from 'jwt-decode'
-import { getProfile, changeUserData } from './UserFunctions'
+import { getProfile, changeUserData, getUserZip } from './UserFunctions'
 
 class Profile extends Component {
    constructor() {
@@ -23,26 +23,15 @@ class Profile extends Component {
    }
    onSubmit(e) {
       e.preventDefault()
+      console.log('submit state: ');
+
       console.log(this.state);
-
-      this.setState({
-         staticZip: this.state.zip
-      })
-
-      // TÄHÄN tarkistaa onko zippiä olemassa, jos ei niin ei vaihda sitä
-      // samalla saa zipin vastaavan locaation
-
-
-      //hakee tokenin -> TODO:landing sivulle automaattinen api haku käyttäjän mongon zipistä
-
-      //TODO
-      //
-      // lähetä uusi zip koodi (ja käyttäjätunnus?) backendiin, vaihda kyseisen käyttäjän zip koodi 
 
       const data = {
          username: this.state.username,
          zip: this.state.zip
       }
+
       changeUserData(data).then(status => {
          if (status === 'Wrong password') {
             this.setState({ error: status })
@@ -52,8 +41,19 @@ class Profile extends Component {
             //this.props.history.push(`/profile`)
          }
       })
+
+      getUserZip(this.state.username).then(status => {
+         var userZip = status
+         this.setState({
+            staticZip: userZip
+         })
+
+         console.log('backendistä saatu zip: ' + userZip);
+      })
+
    }
 
+   // sivulle tullessa hakee tietokannasta käyttäjän nimen sekä zip koodin 
    componentDidMount() {
       const token = localStorage.usertoken
       // const decoded = jwt_decode(token)
@@ -63,7 +63,16 @@ class Profile extends Component {
          this.setState({
             username: res.username
          })
+         getUserZip(res.username).then(status => {
+            var userZip = status
+            this.setState({
+               staticZip: userZip
+            })
+
+            console.log('backendistä saatu zip: ' + userZip);
+         })
       })
+
 
 
    }
