@@ -12,6 +12,8 @@ class WeekContainer extends React.Component {
 
    componentDidMount = () => {
       this.setState({ location: this.props.location });
+      console.log(this.props.location);   //EI TOMI !=?!?!
+
       const weatherURL =
          `http://api.openweathermap.org/data/2.5/forecast?q=Tampere&units=metric&appid=0cb470bd4094e6bdd06e699372db26a4`
 
@@ -33,6 +35,7 @@ class WeekContainer extends React.Component {
    }
 
    render() {
+      const { location } = this.state
       return (
          <div className="container">
             <div className="row justify-content-center">

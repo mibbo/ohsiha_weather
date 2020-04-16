@@ -66,7 +66,6 @@ module.exports = {
       var req = request(options, function (error, res) {
          if (error) throw new Error(error);
          var data = JSON.parse(res.body);
-         console.log(res.body);
          response.json(data)
       });
    }

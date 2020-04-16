@@ -16,6 +16,9 @@
 .card--egain {
   flex: 0 0 300px;
 }
+.card--history {
+  flex: 0 0 1000px;
+}
 
 
 /*
@@ -33,19 +36,25 @@ body {
   width: 0vh;
 }
 
+.card--egain{
+  /* min-height: 70vh; */
+  height: 545px;
+  text-align: center;
+}
+
+.card--history{
+  /* min-height: 70vh; */
+  height: 545px;
+  text-align: center;
+}
+
+
 .card.card--weather > ul li {
   height: 20px;
   width: 90%;
   margin: 10px auto;
   text-align: center;
- }
-
-.card--egain{
-  /* min-height: 70vh; */
-  height: 545px;
-  text-align: center;
-
- }
+}
 
  /* ======= day card ========= */
 
