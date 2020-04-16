@@ -158,8 +158,8 @@ class Landing extends Component {
                   <h1 className="text-center">Apartment</h1>
                </header>
                <ul>
-                  <li>Temperature: {roomTemperature} °C</li>
-                  <li>Humidity: {roomHumidity} % </li>
+                  <li id='temp'>{roomTemperature}<sup>°C</sup></li>
+                  <li id='feels'>Humidity {roomHumidity} % </li>
                </ul>
                <h4 className="text-center">History</h4>
                <ul>{this.renderItems()}</ul>

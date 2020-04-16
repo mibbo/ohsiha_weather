@@ -29,7 +29,7 @@ body {
 }
 .card--weather{
   /* min-height: 40vh; */
-  height: 535px;
+  height: 545px;
   width: 0vh;
 }
 
@@ -42,7 +42,9 @@ body {
 
 .card--egain{
   /* min-height: 70vh; */
-  height: 535px;
+  height: 545px;
+  text-align: center;
+
  }
 
  /* ======= day card ========= */
@@ -83,7 +85,7 @@ body {
 }
 #temp {
   font-size: 50px;
-  margin-bottom: 55px;
+  margin-bottom: 50px;
 }
 sup {
   font-size: 30px;
