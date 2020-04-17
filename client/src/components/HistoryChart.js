@@ -21,32 +21,30 @@ class HistoryChart extends React.Component {
 
   buildChart = () => {
     const myChartRef = this.chartRef.current.getContext("2d");
-    const { data, average, labels } = this.props;
+    const { todayData, yesterdayData, labels } = this.props;
 
     if (typeof myLineChart !== "undefined") myLineChart.destroy();
 
     myLineChart = new Chart(myChartRef, {
       type: "line",
       data: {
-        //Bring in data
         labels: labels,
         datasets: [
           {
             label: "Today",
-            data: data,
+            data: todayData,
             fill: false,
             borderColor: "#6bb2ff"
           },
           {
             label: "Yesterday",
-            data: average,
+            data: yesterdayData,
             fill: false,
             borderColor: "#dff1ff"
           }
         ]
       },
       options: {
-        //Customize chart options
       }
     });
 
