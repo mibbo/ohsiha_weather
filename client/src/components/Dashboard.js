@@ -8,7 +8,7 @@ export default class Dashboard extends Component {
    state = {
       data: this.props.tempToday,
       average: this.props.tempYesterday,
-      labels: yearLabels
+      labels: ["00:00", "01:00", "04:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"]
    }
 
    constructor(props) {
@@ -29,13 +29,11 @@ export default class Dashboard extends Component {
       const isAnnual = value === "annual";
 
       const newData = isAnnual ? this.props.tempToday : this.props.humToday;
-      const newLabels = isAnnual ? yearLabels : yearLabels;
       const newAverage = isAnnual ? this.props.tempYesterday : this.props.humYesterday;
 
       this.setState({
          data: newData,
          average: newAverage,
-         labels: newLabels
       })
    }
 
