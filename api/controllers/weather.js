@@ -59,7 +59,7 @@ module.exports = {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
          },
          form: {
-            'daysAgo': '0',
+            'daysAgo': '1',
             'guid': '63558404-EDD4-49DD-AE9F-5BFB5FD5BC4D'
          }
       };
@@ -67,6 +67,8 @@ module.exports = {
          if (error) throw new Error(error);
          var data = JSON.parse(res.body);
          response.json(data)
+         console.log(data);
+
       });
    }
 }

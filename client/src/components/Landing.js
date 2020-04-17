@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { getWeather, getRoomTemp, getRoomTempHistory, getProfile, getUserZip } from './UserFunctions'
 
 import WeekContainer from './WeekContainer';
-import { AreaChart } from 'react-charts-d3';
+import Dashboard from './Dashboard';
 
 class Landing extends Component {
    constructor() {
@@ -18,8 +18,13 @@ class Landing extends Component {
          roomTemperature: '',
          roomHumidity: '',
          roomHistoryData: [],
+         chartData: [],
          loading: true,
-         error: ''
+         error: '',
+         tempToday: [],
+         tempYesterday: [],
+         humToday: [],
+         humYesterday: []
       }
       this.onChange = this.onChange.bind(this)
    }
@@ -82,20 +87,20 @@ class Landing extends Component {
 
 
 
-      getRoomTemp('40020853')
-         .then(res => {
-            if (res === undefined || res.data === null) { // !res
-               this.setState({ error: 'error while fetching apartment temperature data' })
-               console.log(this.state.error);
-               return;
-            }
-            console.log(res);
+      // getRoomTemp('40020853')
+      //    .then(res => {
+      //       if (res === undefined || res.data === null) { // !res
+      //          this.setState({ error: 'error while fetching apartment temperature data' })
+      //          console.log(this.state.error);
+      //          return;
+      //       }
+      //       console.log(res);
 
-            this.setState({
-               roomTemperature: res.data.Temp,
-               roomHumidity: res.data.Humidity
-            })
-         })
+      //       this.setState({
+      //          roomTemperature: res.data.Temp,
+      //          roomHumidity: res.data.Humidity
+      //       })
+      //    })
 
       getRoomTempHistory('40020853')
          .then(res => {
@@ -105,33 +110,103 @@ class Landing extends Component {
                return;
             }
 
-            const datesTemps = [
-               { key: 'Group 1', values: [] },
-            ];
 
-            let temp = res.data.map(obj => {
-               let rObj = {}
-               rObj = { x: obj.Date, y: obj.Temp }
-               return rObj
+            var dates = res.data.map(list => {
+               return list.Date.split(" ")[1]
             })
-            datesTemps[0].values = temp;
 
-            const example = [
-               { key: 'Group 1', values: [{ x: 'A', y: '1' }, { x: 'B', y: '2' }, { x: 'C', y: '3' }, { x: 'D', y: '4' }] },
-            ];
-            console.log(datesTemps);
-            console.log(example);
+            // temperature yesterday(0-23) and today(23->)
+            var temp = res.data.map(list => {
+               return list.Temp
+            })
+
+            // humidity yesterday(0-23) and today(23->)
+            var hum = res.data.map(list => {
+               return list.Hum
+            })
+
+            //dates (00:00-23:00) & (00:00-x)
+            var datesYesterday = dates.splice(0, 24);
+            var datesToday = dates.splice(23, temp.length);
+
+            // temperatures (yesterda)
+            var tempYesterday = temp.splice(0, 24);
+            var atempToday = temp.splice(23, temp.length);
+
+            var humYesterday = hum.splice(0, 24);
+            var ahumToday = hum.splice(24, temp.length);
+
+            console.log(dates);
+            console.log(temp);
+            console.log(hum);
+
+            // console.log(datesToday);
+            // console.log(datesYesterday);
+            // console.log(atempToday);
+            // console.log(atempYesterday);
+            // console.log(ahumToday);
+            // console.log(ahumYesterday);
+
+
+
+
+
+            // const tempToday = [
+            //    1000, 3706, 2850, 4005, 3750, 2912, 3200, 3645, 4205, 3211, 3354, 1000
+            // ]
+
+            // const tempYesterday = [
+            //    4010, 3600, 2900, 3550, 3800, 2900, 3000, 3500, 4000, 3700, 3550, 3800, 4800, 3800, 3800, 3800, 3800
+            // ]
+
+            // const humToday = [
+            //    600, 400, 600, 550, 700, 500, 600, 700, 500, 550, 600, 700
+            // ]
+
+            // const humYesterday = [
+            //    500, 390, 670, 600, 780, 440, 600, 680, 550, 475, 700, 795, 680, 550, 475, 700, 795, 680, 550, 475, 700, 795
+            // ]
+
+            //TODO: Muuta kaikki neljä listaa data yhteen muuttujaan
+
+            // const datesTemps = [
+            //    { data: [] },
+            // ];
+
+            // let temp = res.data.map(obj => {
+            //    let rObj = {}
+            //    rObj = { x: obj.Date, y: obj.Temp }
+            //    return rObj
+            // })
+            // datesTemps[0].values = temp;
 
             this.setState({
-               // roomHistoryData: res.data
-               roomHistoryData: datesTemps
+               roomHistoryData: res.data,
+               // roomHistoryData: datesTemps
+               tempToday: temp,
+               tempYesterday: tempYesterday,
+               humToday: hum,
+               humYesterday: humYesterday
             })
          })
+         // kertoo milloin on hakenut datan ja asettaa loading false -> 
          .finally(() => (
             console.log('ei lattaa ennää'),
             this.setState({
                loading: false
             })));
+   }
+
+   //renderöi Dashboardin ja antaa tarvittavan datan mappina
+   renderDashboard = () => {
+      console.log('MANAGERDATA');
+      console.log(this.state.tempToday[0]);
+
+      return <Dashboard
+         tempToday={this.state.tempToday}
+         tempYesterday={this.state.tempYesterday}
+         humToday={this.state.humToday}
+         humYesterday={this.state.humYesterday} />
    }
 
 
@@ -145,9 +220,6 @@ class Landing extends Component {
                <span> - {item.Hum}%</span>
             </li>
          </Fragment>
-
-         // <AreaChart data={roomHistoryData} />
-
       ));
       return mapRows;
    };
@@ -160,8 +232,6 @@ class Landing extends Component {
       // ];
       // console.log(roomHistoryData);
       // console.log(example);
-
-      const historyChart = <AreaChart data={this.state.roomHistoryData} />
 
       return (
          <div className="cards" >
@@ -194,14 +264,14 @@ class Landing extends Component {
                   <li id='feels'>Humidity {roomHumidity} % </li>
                </ul>
                <h4 className="text-center">History</h4>
-               <ul>{this.renderItems()}</ul>
+               {/* <ul>{this.renderItems()}</ul> */}
             </section >
             <section className="card card--history">
                <header>
                   <h1 className="text-center">History</h1>
                </header>
                <div className="row justify-content-center">
-                  {loading ? null : historyChart}
+                  {loading ? null : this.renderDashboard()}
                </div>
             </section >
          </div >

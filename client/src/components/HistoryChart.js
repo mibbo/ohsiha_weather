@@ -1,28 +1,72 @@
-import React from 'react';
-import d3Utils from './utils';
-import d3Config from './config';
+import React, { Component } from 'react'
+import Chart from "chart.js";
+import classes from "./HistoryChart.module.css";
+let myLineChart;
 
-export default class LineChart extends React.Component {
-  constructor(props) {
-    // We'll fill this out soon
-  }
+//--Chart Style Options--//
+Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif"
+Chart.defaults.global.legend.display = false;
+//--Chart Style Options--//
+
+class HistoryChart extends React.Component {
+  chartRef = React.createRef();
 
   componentDidMount() {
-    const { timeSeriesData } = this.props;
-    d3Utils.initializeChart(timeSeriesData, 'monthToDate');
+    this.buildChart();
   }
 
-  componentDidUpdate(prevProps) {
-    // This too
+  componentDidUpdate() {
+    this.buildChart();
   }
 
-  componentWillUnmount() {
-    // And finally this
+  buildChart = () => {
+    const myChartRef = this.chartRef.current.getContext("2d");
+    const { data, average, labels } = this.props;
+
+    if (typeof myLineChart !== "undefined") myLineChart.destroy();
+
+    myLineChart = new Chart(myChartRef, {
+      type: "line",
+      data: {
+        //Bring in data
+        labels: labels,
+        datasets: [
+          {
+            label: "Today",
+            data: data,
+            fill: false,
+            borderColor: "#6610f2"
+          },
+          {
+            label: "Yesterday",
+            data: average,
+            fill: false,
+            borderColor: "#E0E0E0"
+          }
+        ]
+      },
+      options: {
+        //Customize chart options
+      }
+    });
+
   }
 
   render() {
+
     return (
-      <svg className="line-chart" width="100%" height={d3Config.svgHeight} />
-    );
+      <div className={classes.graphContainer}>
+        <canvas
+          id="myChart"
+          ref={this.chartRef}
+        />
+      </div>
+    )
   }
 }
+
+export default HistoryChart;
+
+
+
+

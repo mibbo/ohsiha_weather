@@ -17,7 +17,7 @@
   flex: 0 0 300px;
 }
 .card--history {
-  flex: 0 0 1000px;
+  flex: 0 0 1100px;
 }
 
 
@@ -44,7 +44,7 @@ body {
 
 .card--history{
   /* min-height: 70vh; */
-  height: 545px;
+  height: 560px;
   text-align: center;
 }
 
