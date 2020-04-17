@@ -258,6 +258,8 @@ class Landing extends Component {
                <ul>
                   <li id='temp'>{roomTemperature}<sup>°C</sup></li>
                   <li id='feels'>Humidity {roomHumidity} % </li>
+                  <li id='time'>lisää aika tähän </li>
+
                </ul>
             </section >
             <section className="card card--history">

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import classes from "./Chart.module.css";
 import HistoryChart from './HistoryChart';
-// import chartIcon from "../../assets/chart-icon.svg";
-import { managerData, nationalAverageData, yearLabels, managerQuarterData, nationalAverageQuarterData, quarterLabels } from "./mockData";
 
 export default class Dashboard extends Component {
    state = {
@@ -36,7 +34,6 @@ export default class Dashboard extends Component {
    render() {
       const { data, average, labels, info } = this.state;
       return (
-
          <div className={classes.chartcontainer}>
             <h4>{info}</h4>
 
