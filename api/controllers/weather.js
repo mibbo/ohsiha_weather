@@ -68,7 +68,6 @@ module.exports = {
          var data = JSON.parse(res.body);
          response.json(data)
          console.log(data);
-
       });
    }
 }

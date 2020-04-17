@@ -1,13 +1,15 @@
-/* .chartcontainer {
-   height: 100vh;
+.chartcontainer {
+   text-align: left;
+   margin-top: -38px;
+   /* height: 100vh;
    width: 100%;
    background: var(--theme-primary);
    color: white;
    display: flex;
    align-items: center;
    justify-content: center;
-   flex-direction: column;
-} */
+   flex-direction: column; */
+}
 
 .buttonContainer {
    display: flex;
@@ -31,6 +33,14 @@
 }
 
 .buttonContainer button:hover {
-   background: rgb(255, 255, 255, 0.1);
+   background: rgba(0, 0, 0, 0.1);
    padding: 2px 13px;
+}
+
+.graphContainer {
+   width: 50vw;
+   height: 55vh;
+   background: white;
+   padding: 30px 20px 10px 20px;
+   border-radius: 10px;
 }

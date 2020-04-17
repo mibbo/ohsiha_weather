@@ -44,7 +44,7 @@ body {
 
 .card--history{
   /* min-height: 70vh; */
-  height: 560px;
+  height: 575px;
   text-align: center;
 }
 
@@ -126,6 +126,7 @@ sup {
  margin: 12px; 
  margin-top: 50px;
  background: #e9f5ff;
+
  border-radius: 7px;
  padding: 0 0 50px 0;
  border: 0;

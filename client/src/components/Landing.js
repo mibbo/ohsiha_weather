@@ -114,38 +114,34 @@ class Landing extends Component {
             var dates = res.data.map(list => {
                return list.Date.split(" ")[1]
             })
-
             // temperature yesterday(0-23) and today(23->)
             var temp = res.data.map(list => {
                return list.Temp
             })
-
             // humidity yesterday(0-23) and today(23->)
             var hum = res.data.map(list => {
                return list.Hum
             })
 
-            //dates (00:00-23:00) & (00:00-x)
-            var datesYesterday = dates.splice(0, 24);
-            var datesToday = dates.splice(23, temp.length);
-
-            // temperatures (yesterda)
+            //dates x-axis (00:00-23:00)
+            var dates = dates.splice(0, 24);
+            // temperature y-axis
             var tempYesterday = temp.splice(0, 24);
-            var atempToday = temp.splice(23, temp.length);
-
+            var tempToday = temp.splice(23, temp.length);
+            // humiditys y-axis
             var humYesterday = hum.splice(0, 24);
-            var ahumToday = hum.splice(24, temp.length);
+            var humToday = hum.splice(24, temp.length);
 
-            console.log(dates);
-            console.log(temp);
-            console.log(hum);
+            // console.log(dates);
+            // console.log(temp);
+            // console.log(hum);
 
             // console.log(datesToday);
             // console.log(datesYesterday);
-            // console.log(atempToday);
+            // console.log(tempToday);
             // console.log(atempYesterday);
-            // console.log(ahumToday);
-            // console.log(ahumYesterday);
+            // console.log(humToday);
+            // console.log(humYesterday);
 
 
 
@@ -263,12 +259,10 @@ class Landing extends Component {
                   <li id='temp'>{roomTemperature}<sup>°C</sup></li>
                   <li id='feels'>Humidity {roomHumidity} % </li>
                </ul>
-               <h4 className="text-center">History</h4>
-               {/* <ul>{this.renderItems()}</ul> */}
             </section >
             <section className="card card--history">
                <header>
-                  <h1 className="text-center">History</h1>
+                  <h1 className="text-center">Apartment</h1>
                </header>
                <div className="row justify-content-center">
                   {loading ? null : this.renderDashboard()}

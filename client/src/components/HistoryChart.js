@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Chart from "chart.js";
-import classes from "./HistoryChart.module.css";
+import classes from "./Chart.module.css";
 let myLineChart;
 
 //--Chart Style Options--//
@@ -35,13 +35,13 @@ class HistoryChart extends React.Component {
             label: "Today",
             data: data,
             fill: false,
-            borderColor: "#6610f2"
+            borderColor: "#6bb2ff"
           },
           {
             label: "Yesterday",
             data: average,
             fill: false,
-            borderColor: "#E0E0E0"
+            borderColor: "#dff1ff"
           }
         ]
       },
