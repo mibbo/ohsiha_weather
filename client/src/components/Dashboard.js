@@ -36,7 +36,6 @@ export default class Dashboard extends Component {
       return (
          <div className={classes.chartcontainer}>
             <h4>{info}</h4>
-
             <div className={classes.buttonContainer}>
                <button
                   value="annual"
@@ -52,8 +51,7 @@ export default class Dashboard extends Component {
             <HistoryChart
                todayData={todayData}
                yesterdayData={yesterdayData}
-               labels={labels}
-            />
+               labels={labels} />
          </div>
       )
    }
