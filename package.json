@@ -7,7 +7,9 @@
     "client": "cd client && npm start",
     "api": "cd api && npm start",
     "start": "concurrently \"npm run api\" \"npm run client\"",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "client-postbuild": "cd client && npm install && npm run build",
+    "api-postbuild": "cd api && npm install && npm run build",
+    "heroku-postbuild": "concurrently \"npm run client-postbuild\" \"npm run api-postbuild\""
   },
   "repository": {
     "type": "git",
