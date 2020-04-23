@@ -3,13 +3,15 @@ var cors = require('cors')
 var bodyParser = require('body-parser')
 var app = express()
 const mongoose = require('mongoose')
+const path = require('path');
 require("dotenv").config();
 
-const port = process.env.PORT || 3001
+const port = 3001
 //var port = "5000" //tässä oli näin: var port = process.env.PORT || 5000
 var password = process.env.DB_PASSWORD
 
 app.use(bodyParser.json())
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(cors())
 app.use(
   bodyParser.urlencoded({
