@@ -3,7 +3,7 @@ import axios from 'axios'
 export const register = newUser => {
    return axios
       //sends the body data to backend
-      .post('users/register', {
+      .post('api/users/register', {
          username: newUser.username,
          password: newUser.password
       })
@@ -21,7 +21,7 @@ export const register = newUser => {
 
 export const login = user => {
    return axios
-      .post('users/login', {
+      .post('api/users/login', {
          username: user.username,
          password: user.password
       })
@@ -41,7 +41,7 @@ export const login = user => {
 
 export const getProfile = token => {
    return axios
-      .get('users/profile', {
+      .get('api/users/profile', {
          headers: { Authorization: ` ${token}` }
       })
       .then(response => {
@@ -57,7 +57,7 @@ export const getProfile = token => {
 export const changeUserData = data => {
    console.log('changeUserData');
    return axios
-      .post('users/changeUserData', {
+      .post('api/users/changeUserData', {
          username: data.username,
          zip: data.zip
       })
@@ -77,7 +77,7 @@ export const getUserZip = data => {
    console.log('getWeather');
    return axios
       //lähettää backendiin usernamen
-      .get('users/getUserZip', {
+      .get('api/users/getUserZip', {
          headers: { username: ` ${data}` }
       })
       .then(response => {
@@ -97,7 +97,7 @@ export const getWeather = data => {
    console.log('getWeather');
    return axios
       //saa tarvittavat datat json muodossa
-      .get('weather/zipWeather', {
+      .get('api/weather/zipWeather', {
          headers: { zipcode: ` ${data}` }
       })
       .then(response => {
@@ -113,7 +113,7 @@ export const getWeather = data => {
 export const getRoomTemp = data => {
    return axios
       //saa tarvittavat datat json muodossa
-      .get('weather/roomTemp', {
+      .get('api/weather/roomTemp', {
          headers: { sensorID: ` ${data}` }
       })
       .then(response => {
@@ -130,7 +130,7 @@ export const getRoomTemp = data => {
 export const getRoomTempHistory = data => {
    return axios
       //saa tarvittavat datat json muodossa
-      .get('weather/roomTempHistory', {
+      .get('api/weather/roomTempHistory', {
          headers: { sensorID: ` ${data}` }
       })
       .then(response => {
