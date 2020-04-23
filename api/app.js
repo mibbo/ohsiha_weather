@@ -5,7 +5,7 @@ var app = express()
 const mongoose = require('mongoose')
 require("dotenv").config();
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 3001
 //var port = "5000" //tässä oli näin: var port = process.env.PORT || 5000
 var password = process.env.DB_PASSWORD
 
@@ -20,7 +20,7 @@ app.use(
 const url =
   `mongodb+srv://mibbo:${password}@mibbocluster-hquln.mongodb.net/test?retryWrites=true`;
 
-console.log("atlas salis: " + password);
+//console.log("atlas salis: " + password);
 
 
 mongoose
