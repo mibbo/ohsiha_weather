@@ -28,6 +28,7 @@ const mongoURI = 'mongodb://localhost:27017/database'
 
 const url =
   `mongodb+srv://mibbo:${password}@mibbocluster-hquln.mongodb.net/test?retryWrites=true`;
+console.log("atlas salis: " + password);
 
 
 mongoose
