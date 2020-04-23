@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "chart.js": "^2.9.3",
+    "http-proxy-middleware": "^1.0.3",
     "jwt-decode": "^2.2.0",
     "moment": "^2.24.0",
     "react": "^16.13.0",
@@ -40,7 +41,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000",
   "main": "index.js",
   "author": "",
   "license": "ISC",
