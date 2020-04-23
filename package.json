@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "cd api && npm start",
     "client": "cd client && npm start",
-    "start": "npm run server & npm run client"
+    "api": "cd api && npm start",
+    "start": "concurrently \"npm run api\" \"npm run client\"",
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
