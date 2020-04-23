@@ -1,7 +1,7 @@
 {
   "name": "ohsiha_weather_app",
   "version": "1.0.0",
-  "description": "nodejs login with jwt token",
+  "description": "weatherAPI backend",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
