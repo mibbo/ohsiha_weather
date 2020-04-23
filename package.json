@@ -8,7 +8,7 @@
     "api": "cd api && npm start",
     "start": "concurrently \"npm run api\" \"npm run client\"",
     "client-postbuild": "cd client && npm install && npm run build",
-    "api-postbuild": "cd api && npm install && npm run build",
+    "api-postbuild": "cd api && npm install",
     "heroku-postbuild": "concurrently \"npm run client-postbuild\" \"npm run api-postbuild\""
   },
   "repository": {
