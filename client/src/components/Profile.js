@@ -78,7 +78,7 @@ class Profile extends Component {
    }
 
    render() {
-      const { username, location, staticZip, zip, error } = this.state
+      const { username, location, staticZip, error } = this.state
       return (
          <div className="container" >
             <div className="jumbotron mt-5">

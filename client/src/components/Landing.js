@@ -111,9 +111,9 @@ class Landing extends Component {
             }
 
 
-            var dates = res.data.map(list => {
-               return list.Date.split(" ")[1]
-            })
+            // var allDates = res.data.map(list => {
+            //    return list.Date.split(" ")[1]
+            // })
             // temperature yesterday(0-23) and today(23->)
             var temp = res.data.map(list => {
                return list.Temp
@@ -124,13 +124,13 @@ class Landing extends Component {
             })
 
             //dates x-axis (00:00-23:00)
-            var dates = dates.splice(0, 24);
+            //var dates = allDates.splice(0, 24);
             // temperature y-axis
             var tempYesterday = temp.splice(0, 24);
-            var tempToday = temp.splice(23, temp.length);
+            //var tempToday = temp.splice(23, temp.length);
             // humiditys y-axis
             var humYesterday = hum.splice(0, 24);
-            var humToday = hum.splice(24, temp.length);
+            //var humToday = hum.splice(24, temp.length);
 
             // console.log(dates);
             // console.log(temp);
@@ -187,7 +187,6 @@ class Landing extends Component {
          })
          // kertoo milloin on hakenut datan ja asettaa loading false -> 
          .finally(() => (
-            console.log('ei lattaa ennää'),
             this.setState({
                loading: false
             })));
@@ -222,7 +221,7 @@ class Landing extends Component {
 
 
    render() {
-      const { temperature, location, zip, country, feelsLike, icon, roomTemperature, roomHumidity, roomHistoryData, loading, error } = this.state
+      const { temperature, location, zip, country, feelsLike, icon, roomTemperature, roomHumidity, loading, error } = this.state
       // const example = [
       //    { key: 'Group 1', values: [{ x: 'A', y: '1' }, { x: 'B', y: '2' }, { x: 'C', y: '3' }, { x: 'D', y: '4' }] },
       // ];

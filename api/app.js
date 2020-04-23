@@ -5,7 +5,8 @@ var app = express()
 const mongoose = require('mongoose')
 require("dotenv").config();
 
-var port = "5000" //tässä oli näin: var port = process.env.PORT || 5000
+const port = process.env.PORT || 5000
+//var port = "5000" //tässä oli näin: var port = process.env.PORT || 5000
 var password = process.env.DB_PASSWORD
 
 app.use(bodyParser.json())

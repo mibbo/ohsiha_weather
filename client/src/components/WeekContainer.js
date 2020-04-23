@@ -17,7 +17,7 @@ class WeekContainer extends React.Component {
       const weatherURL =
          `http://api.openweathermap.org/data/2.5/forecast?q=Tampere&units=metric&appid=0cb470bd4094e6bdd06e699372db26a4`
 
-      let url = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + this.state.latitude + '&lon=' + this.state.longitude + '&units=metric&appid=0cb470bd4094e6bdd06e699372db26a4';
+      // let url = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + this.state.latitude + '&lon=' + this.state.longitude + '&units=metric&appid=0cb470bd4094e6bdd06e699372db26a4';
 
       fetch(weatherURL)
          .then(res => res.json())
@@ -35,7 +35,6 @@ class WeekContainer extends React.Component {
    }
 
    render() {
-      const { location } = this.state
       return (
          <div className="container">
             <div className="row justify-content-center">
