@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const path = require('path')
 require("dotenv").config();
 
-const port = 3001
+const port = process.env.PORT || 5000
 //var port = "5000" //tässä oli näin: var port = process.env.PORT || 5000
 var password = process.env.DB_PASSWORD
 
@@ -20,8 +20,7 @@ app.use(
 
 
 // Serve static files from the React frontend app
-// app.use(express.static(path.join(__dirname, '../client/build')))
-
+app.use(express.static(path.join(__dirname, '../client/build')))
 // app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 
@@ -52,9 +51,9 @@ require('./router.js')(app);
 
 
 // AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname + '/../client/build/index.html'))
-// })
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/../client/build/index.html'))
+})
 
 
 app.listen(port, function () {
