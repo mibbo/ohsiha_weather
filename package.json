@@ -18,5 +18,9 @@
   "bugs": {
     "url": "https://github.com/mibbo/ohsiha_weather/issues"
   },
-  "homepage": "https://github.com/mibbo/ohsiha_weather#readme"
+  "homepage": "https://github.com/mibbo/ohsiha_weather#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  }
 }
