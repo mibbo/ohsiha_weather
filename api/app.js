@@ -3,7 +3,7 @@ var cors = require('cors')
 var bodyParser = require('body-parser')
 var app = express()
 const mongoose = require('mongoose')
-const path = require('path');
+const path = require('path')
 require("dotenv").config();
 
 const port = 3001
@@ -11,13 +11,19 @@ const port = 3001
 var password = process.env.DB_PASSWORD
 
 app.use(bodyParser.json())
-app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(cors())
 app.use(
   bodyParser.urlencoded({
     extended: false
   })
 )
+
+
+// Serve static files from the React frontend app
+// app.use(express.static(path.join(__dirname, '../client/build')))
+
+// app.use(express.static(path.resolve(__dirname, '../client/build')));
+
 
 const url =
   `mongodb+srv://mibbo:${password}@mibbocluster-hquln.mongodb.net/test?retryWrites=true`;
@@ -43,6 +49,12 @@ require('./router.js')(app);
 // app.use('/users', UsersRouter)
 // app.use('/weather', WeatherRouter)
 // app.use('/egain', EgainRouter)
+
+
+// AFTER defining routes: Anything that doesn't match what's above, send back index.html; (the beginning slash ('/') in the string is important!)
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname + '/../client/build/index.html'))
+// })
 
 
 app.listen(port, function () {
