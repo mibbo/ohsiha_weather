@@ -5,7 +5,8 @@ let myLineChart;
 
 //--Chart Style Options--//
 Chart.defaults.global.defaultFontFamily = "'PT Sans', sans-serif"
-Chart.defaults.global.legend.display = false;
+Chart.defaults.global.legend.display = true;
+Chart.defaults.global.background = 'red';
 //--Chart Style Options--//
 
 class HistoryChart extends React.Component {
@@ -40,11 +41,14 @@ class HistoryChart extends React.Component {
             label: "Yesterday",
             data: yesterdayData,
             fill: false,
-            borderColor: "#dff1ff"
+            borderColor: "#d2ebff"//"#dff1ff"
           }
         ]
       },
       options: {
+        chartArea: {
+          backgroundColor: 'rgba(251, 85, 85, 0.4)'
+        }
       }
     });
 

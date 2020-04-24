@@ -61,11 +61,11 @@ body {
 .card.card--day{
   height: 205px;
   width: 160px;
-  background: #d4eafd;
+  /* background: #d4eafd; */
   margin: 10px auto;
 }
 .card.card--day > header {
-  background: #9dd0ff;
+  /* background: #9dd0ff; */
   height: 1000px;
   border-radius:  7px 7px 0 0;
  }
@@ -81,7 +81,7 @@ body {
  }
 
 #li1 {
-  color: #7c7c7c;
+  /* color: #7c7c7c; */
 }
 #li2 {
   font-size:30px;
@@ -90,7 +90,7 @@ body {
 
 
 #location {
-  color: #7c7c7c;
+  /* color: #7c7c7c; */
 }
 #temp {
   font-size: 50px;
@@ -100,10 +100,10 @@ sup {
   font-size: 30px;
 }
 #feels {
-  color: #7c7c7c;
+  /* color: #7c7c7c; */
 }
 #line {
-  background: #d9e4ee;
+  /* background: #515558; */
   border-radius:  7px 7px 7px 7px;
   height: 10px;
 }
@@ -125,7 +125,7 @@ sup {
 .card {
  margin: 12px; 
  margin-top: 50px;
- background: #e9f5ff;
+ /* background: #d2ebff; */
 
  border-radius: 7px;
  padding: 0 0 50px 0;
@@ -136,7 +136,7 @@ sup {
 = ====== card inner components =========
 */
 .card > header {
- background: #9dd0ff;
+ /* background: #9dd0ff; */
  height: 50px;
  border-radius:  7px 7px 0 0;
 }

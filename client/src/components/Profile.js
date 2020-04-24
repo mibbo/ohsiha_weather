@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 //import jwt_decode from 'jwt-decode'
 import { getProfile, changeUserData, getUserZip } from './UserFunctions'
 
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from '../theme';
+import { GlobalStyles } from '../global';
+
 class Profile extends Component {
    constructor() {
       super()
@@ -10,6 +14,7 @@ class Profile extends Component {
          location: '',
          staticZip: '',
          zip: '',
+         theme: '',
          error: ''
       }
 
@@ -78,9 +83,14 @@ class Profile extends Component {
    }
 
    render() {
-      const { username, location, staticZip, error } = this.state
+      const { username, location, staticZip, theme, error } = this.state
       return (
          <div className="container" >
+            <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+               <>
+                  <GlobalStyles />
+               </>
+            </ThemeProvider>
             <div className="jumbotron mt-5">
                <div className="col-sm-8 mx-auto">
                   <h1 className="text-center">PROFILE</h1>

@@ -21,6 +21,8 @@ app.use(
 
 // Serve static files from the React frontend app
 app.use(express.static(path.join(__dirname, '../client/build')))
+
+// älä käytä tätä
 // app.use(express.static(path.resolve(__dirname, '../client/build')));
 
 

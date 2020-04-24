@@ -1,14 +1,14 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment, useEffect, useState } from 'react'
 import { getWeather, getRoomTemp, getRoomTempHistory, getProfile, getUserZip } from './UserFunctions'
 
 import WeekContainer from './WeekContainer';
 import Dashboard from './Dashboard';
 
 import { ThemeProvider } from 'styled-components';
-
-import { useDarkMode } from './useDarkMode';
 import { lightTheme, darkTheme } from '../theme';
 import { GlobalStyles } from '../global';
+
+
 
 class Landing extends Component {
    constructor() {
@@ -30,7 +30,8 @@ class Landing extends Component {
          tempToday: [],
          tempYesterday: [],
          humToday: [],
-         humYesterday: []
+         humYesterday: [],
+         theme: ''
       }
       this.onChange = this.onChange.bind(this)
    }
@@ -41,6 +42,9 @@ class Landing extends Component {
    }
 
    componentDidMount() {
+      this.setState({ theme: localStorage.theme })
+
+
       const token = localStorage.usertoken
 
       //jos käyttäjä kirjautunut niin hakee käyttäjäkohtaisen säädatan
@@ -79,7 +83,6 @@ class Landing extends Component {
                this.setState({ error: 'error while fetching weather data' })
                return;
             }
-            console.log(res);
 
             this.setState({
                location: res.data.name,
@@ -117,77 +120,21 @@ class Landing extends Component {
             }
 
 
-            // var allDates = res.data.map(list => {
-            //    return list.Date.split(" ")[1]
-            // })
-            // temperature yesterday(0-23) and today(23->)
-            var temp = res.data.map(list => {
+            // parse data to temperature and humidity lists for the chart
+            var tempToday = res.data.map(list => {
                return list.Temp
             })
-            // humidity yesterday(0-23) and today(23->)
-            var hum = res.data.map(list => {
+            var humToday = res.data.map(list => {
                return list.Hum
             })
-
-            //dates x-axis (00:00-23:00)
-            //var dates = allDates.splice(0, 24);
-            // temperature y-axis
-            var tempYesterday = temp.splice(0, 24);
-            //var tempToday = temp.splice(23, temp.length);
-            // humiditys y-axis
-            var humYesterday = hum.splice(0, 24);
-            //var humToday = hum.splice(24, temp.length);
-
-            // console.log(dates);
-            // console.log(temp);
-            // console.log(hum);
-
-            // console.log(datesToday);
-            // console.log(datesYesterday);
-            // console.log(tempToday);
-            // console.log(atempYesterday);
-            // console.log(humToday);
-            // console.log(humYesterday);
-
-
-
-
-
-            // const tempToday = [
-            //    1000, 3706, 2850, 4005, 3750, 2912, 3200, 3645, 4205, 3211, 3354, 1000
-            // ]
-
-            // const tempYesterday = [
-            //    4010, 3600, 2900, 3550, 3800, 2900, 3000, 3500, 4000, 3700, 3550, 3800, 4800, 3800, 3800, 3800, 3800
-            // ]
-
-            // const humToday = [
-            //    600, 400, 600, 550, 700, 500, 600, 700, 500, 550, 600, 700
-            // ]
-
-            // const humYesterday = [
-            //    500, 390, 670, 600, 780, 440, 600, 680, 550, 475, 700, 795, 680, 550, 475, 700, 795, 680, 550, 475, 700, 795
-            // ]
-
-            //TODO: Muuta kaikki neljä listaa data yhteen muuttujaan
-
-            // const datesTemps = [
-            //    { data: [] },
-            // ];
-
-            // let temp = res.data.map(obj => {
-            //    let rObj = {}
-            //    rObj = { x: obj.Date, y: obj.Temp }
-            //    return rObj
-            // })
-            // datesTemps[0].values = temp;
+            var tempYesterday = tempToday.splice(0, 24);
+            var humYesterday = humToday.splice(0, 24);
 
             this.setState({
                roomHistoryData: res.data,
-               // roomHistoryData: datesTemps
-               tempToday: temp,
+               tempToday: tempToday,
                tempYesterday: tempYesterday,
-               humToday: hum,
+               humToday: humToday,
                humYesterday: humYesterday
             })
          })
@@ -196,7 +143,25 @@ class Landing extends Component {
             this.setState({
                loading: false
             })));
+
+
+
+
    }
+
+   toggleTheme = () => {
+      // if the theme is not light, then set it to dark
+      if (this.state.theme === 'light') {
+         localStorage.setItem('theme', 'dark')
+         this.setState({ theme: 'dark' })
+         // otherwise, it should be light
+      } else {
+         localStorage.setItem('theme', 'light')
+         this.setState({ theme: 'light' })
+      }
+   }
+
+
 
    //renderöi Dashboardin ja antaa tarvittavan datan mappina
    renderDashboard = () => {
@@ -227,59 +192,60 @@ class Landing extends Component {
 
 
    render() {
-      const { temperature, location, zip, country, feelsLike, icon, roomTemperature, roomHumidity, loading, error } = this.state
-      // const example = [
-      //    { key: 'Group 1', values: [{ x: 'A', y: '1' }, { x: 'B', y: '2' }, { x: 'C', y: '3' }, { x: 'D', y: '4' }] },
-      // ];
-      // console.log(roomHistoryData);
-      // console.log(example);
-
-      const [theme, toggleTheme, componentMounted] = useDarkMode();
-      const themeMode = theme === 'light' ? lightTheme : darkTheme;
+      const { temperature, location, zip, country, feelsLike, icon, roomTemperature, roomHumidity, loading, theme, error } = this.state
 
       return (
-         <div className="cards" >
-            <section className="card card--weather">
-               <header>
-                  <h1 className="text-center">Weather</h1>
-               </header>
-               <button onClick={toggleTheme}>Dark/Light</button>
-               <span>
-                  {error}
-               </span>
-               <ul>
-                  <li id='location'>{location}, {zip}, {country}</li>
-                  <li id='temp'><sup><img src={'http://openweathermap.org/img/wn/' + icon + '@2x.png'} /></sup>{Math.round(temperature)}<sup>°C</sup></li>
-                  <li id='feels'>Feels like {Math.round(feelsLike)} °C</li>
-                  <li></li>
-                  <li id="line"></li>
-                  <li id="daily">Daily</li>
+         <div className="darkLightMode" >
+            <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+               <>
+                  <GlobalStyles />
+                  <button onClick={this.toggleTheme}>Dark/Light</button>
+               </>
+            </ThemeProvider>
+            <div className="cards" >
+               <section className="card card--weather">
+                  <header>
+                     <h1 className="text-center">Weather</h1>
+                  </header>
 
-               </ul>
-               <div className="App">
-                  <WeekContainer location={location} />
-               </div>
-            </section>
-            <section className="card card--egain">
-               <header>
-                  <h1 className="text-center">Apartment</h1>
-               </header>
-               <ul>
-                  <li id='temp'>{roomTemperature}<sup>°C</sup></li>
-                  <li id='feels'>Humidity {roomHumidity} % </li>
-                  <li id='time'>lisää aika tähän </li>
+                  <span>
+                     {error}
+                  </span>
+                  <ul>
+                     <li id='location'>{location}, {zip}, {country}</li>
+                     <li id='temp'><sup><img src={'http://openweathermap.org/img/wn/' + icon + '@2x.png'} /></sup>{Math.round(temperature)}<sup>°C</sup></li>
+                     <li id='feels'>Feels like {Math.round(feelsLike)} °C</li>
+                     <li></li>
+                     <li id="line"></li>
+                     <li id="daily">Daily</li>
 
-               </ul>
-            </section >
-            <section className="card card--history">
-               <header>
-                  <h1 className="text-center">Apartment</h1>
-               </header>
-               <div className="row justify-content-center">
-                  {loading ? null : this.renderDashboard()}
-               </div>
-            </section >
-         </div >
+                  </ul>
+                  <div className="App">
+                     <WeekContainer location={location} />
+                  </div>
+               </section>
+               <section className="card card--egain">
+                  <header>
+                     <h1 className="text-center">Apartment</h1>
+                  </header>
+                  <ul>
+                     <li id='temp'>{roomTemperature}<sup>°C</sup></li>
+                     <li id='feels'>Humidity {roomHumidity} % </li>
+                     <li id='time'>lisää aika tähän </li>
+
+                  </ul>
+               </section >
+               <section className="card card--history">
+                  <header>
+                     <h1 className="text-center">Apartment</h1>
+                  </header>
+                  <div className="row justify-content-center">
+                     {loading ? null : this.renderDashboard()}
+                  </div>
+               </section >
+            </div >
+         </div>
+
       )
    }
 }

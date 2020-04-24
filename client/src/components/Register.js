@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { register } from './UserFunctions'
 
+import { ThemeProvider } from 'styled-components';
+import { lightTheme, darkTheme } from '../theme';
+import { GlobalStyles } from '../global';
 
 class Register extends Component {
    constructor() {
@@ -8,11 +11,16 @@ class Register extends Component {
       this.state = {
          username: '',
          password: '',
+         theme: '',
          error: ''
       }
 
       this.onChange = this.onChange.bind(this)
       this.onSubmit = this.onSubmit.bind(this)
+   }
+
+   componentDidMount() {
+      this.setState({ theme: localStorage.theme })
    }
 
    onChange(e) {
@@ -44,9 +52,14 @@ class Register extends Component {
    }
 
    render() {
-      const { username, password, error } = this.state
+      const { username, password, theme, error } = this.state
       return (
          <div className="container">
+            <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+               <>
+                  <GlobalStyles />
+               </>
+            </ThemeProvider>
             <div className="row">
                <div className="col-md-6 mt-5 mx-auto">
                   <form noValidate onSubmit={this.onSubmit}>
