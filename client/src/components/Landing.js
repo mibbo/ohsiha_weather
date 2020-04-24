@@ -4,6 +4,12 @@ import { getWeather, getRoomTemp, getRoomTempHistory, getProfile, getUserZip } f
 import WeekContainer from './WeekContainer';
 import Dashboard from './Dashboard';
 
+import { ThemeProvider } from 'styled-components';
+
+import { useDarkMode } from './useDarkMode';
+import { lightTheme, darkTheme } from '../theme';
+import { GlobalStyles } from '../global';
+
 class Landing extends Component {
    constructor() {
       super()
@@ -228,12 +234,16 @@ class Landing extends Component {
       // console.log(roomHistoryData);
       // console.log(example);
 
+      const [theme, toggleTheme, componentMounted] = useDarkMode();
+      const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
       return (
          <div className="cards" >
             <section className="card card--weather">
                <header>
                   <h1 className="text-center">Weather</h1>
                </header>
+               <button onClick={toggleTheme}>Dark/Light</button>
                <span>
                   {error}
                </span>
