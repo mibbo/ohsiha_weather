@@ -60,6 +60,7 @@ class Profile extends Component {
 
    // sivulle tullessa hakee tietokannasta käyttäjän nimen sekä zip koodin 
    componentDidMount() {
+      this.setState({ theme: localStorage.theme })
       const token = localStorage.usertoken
       // const decoded = jwt_decode(token)
       // this.setState({
