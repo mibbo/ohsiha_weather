@@ -19,12 +19,15 @@ export default class Dashboard extends Component {
    //       console.log('historyChart update');
    //    }
    // }
-
+   componentDidMount = () => {
+      //kokeile myös handleButtonClick() 
+      this._interval = window.setInterval(this.handleButtonClick(this.state.info), 900000); //3600000
+   }
 
    // Vaihtaa data käyttäjän painaessa nappia
    handleButtonClick = e => {
       const { value } = e.target;
-      const isAnnual = value === "today";
+      const isAnnual = value === "Temperature °C";
 
       const newtodayData = isAnnual ? this.props.tempToday : this.props.humToday;
       const newyesterdayData = isAnnual ? this.props.tempYesterday : this.props.humYesterday;
@@ -36,6 +39,9 @@ export default class Dashboard extends Component {
          info: newInfo
       })
    }
+   componentWillUnmount() {
+      this._interval && window.clearInterval(this._interval);
+   }
 
    render() {
       const { todayData, yesterdayData, labels, info } = this.state;
@@ -44,7 +50,7 @@ export default class Dashboard extends Component {
             <h4>{info}</h4>
             <div className={classes.buttonContainer}>
                <button
-                  value="today"
+                  value="Temperature °C"
                   onClick={this.handleButtonClick}>
                   Temperature
                </button>
