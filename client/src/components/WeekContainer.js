@@ -24,7 +24,7 @@ class WeekContainer extends React.Component {
       // const weatherURL = baseURL + apiId;
 
       const weatherURL =
-         'http://api.openweathermap.org/data/2.5/forecast?q=Tampere&units=metric&appid=0cb470bd4094e6bdd06e699372db26a4'
+         'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=Tampere&units=metric&appid=0cb470bd4094e6bdd06e699372db26a4'
 
       const getQuotes = () => {
          fetch(weatherURL)
