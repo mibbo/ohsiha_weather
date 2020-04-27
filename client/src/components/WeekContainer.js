@@ -32,7 +32,7 @@ class WeekContainer extends React.Component {
       // const weatherURL =
       //    'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=Tampere&units=metric&appid=5146e8a2b64730def76488283a5ec4f0'
 
-      const getQuotes = () => {
+      const fetchWeather = () => {
          fetch(weatherURL)
             .then(res => res.json())
             .then(data => {
@@ -45,13 +45,13 @@ class WeekContainer extends React.Component {
                } else {
                   this.setState({ error: 'Incorrect postal code' })
                }
-               this.forceUpdate()
+               this.formatDayCards()
             })
       };
       // fetch data when component mounts
-      getQuotes();
+      fetchWeather();
       // fetches data every hour
-      this._interval = window.setInterval(getQuotes, 3600000);
+      this._interval = window.setInterval(fetchWeather, 900000); //3600000
 
    }
 
