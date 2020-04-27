@@ -29,6 +29,9 @@ class Profile extends Component {
    onSubmit(e) {
       e.preventDefault()
       console.log('submit state: ');
+      this.setState({
+         staticZip: this.state.zip
+      })
 
       console.log(this.state);
 
