@@ -80,8 +80,6 @@ class Profile extends Component {
                staticZip: userZip
             })
             localStorage.setItem('localZip', userZip)
-
-
             console.log('backendistä saatu zip: ' + userZip);
          })
       })

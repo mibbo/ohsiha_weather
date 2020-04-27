@@ -56,7 +56,7 @@ class WeekContainer extends React.Component {
       };
       // fetch data when component mounts
       getQuotes();
-      //fetches data every 6 hours
+      // fetches data every 6 hours
       this._interval = window.setInterval(getQuotes, 21600000);
    }
 
@@ -71,8 +71,6 @@ class WeekContainer extends React.Component {
    render() {
       return (
          <div className="container">
-            <h4>mitä{this.props.zip}</h4>
-            <h4>localstorage: {localStorage.localZip}</h4>
             <span>
                {this.state.error}
             </span>
