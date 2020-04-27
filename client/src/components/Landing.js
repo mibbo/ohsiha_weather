@@ -43,110 +43,114 @@ class Landing extends Component {
 
    componentDidMount() {
       this.setState({ theme: localStorage.theme })
-
-
       const token = localStorage.usertoken
 
-      //jos käyttäjä kirjautunut niin hakee käyttäjäkohtaisen säädatan
-      if (localStorage.usertoken) {
-         getProfile(token).then(res => {
-            this.setState({
-               username: res.username
-            })
-            getUserZip(res.username).then(status => {
-               var userZip = status
-               this.setState({
-                  zip: userZip
-               })
-               getWeather(userZip).then(res => {
-                  console.log('then data');
-                  if (!res) {
-                     this.setState({ error: 'error while fetching weather data' })
-                     return;
-                  }
+      const hourly = () => {
+         //jos käyttäjä kirjautunut niin hakee käyttäjäkohtaisen säädatan
+         if (localStorage.usertoken) {
+            getProfile(token).then(res => {
+               if (res === undefined) { // !res
+                  this.setState({ error: 'login token has expired' })
+                  console.log(this.state.error);
+                  return;
+               } else {
                   this.setState({
-                     location: res.data.name,
-                     country: res.data.sys.country,
-                     temperature: res.data.main.temp,
-                     feelsLike: res.data.main.feels_like,
-                     icon: res.data.weather[0].icon
+                     username: res.username
+                  })
+               }
+               // hakee backendin kautta tietokannasta käyttäjän postiosoitteen
+               getUserZip(res.username).then(status => {
+                  var userZip = status
+                  this.setState({
+                     zip: userZip
+                  })
+                  getWeather(userZip).then(res => {
+                     if (!res) {
+                        this.setState({ error: 'error while fetching weather data' })
+                        return;
+                     }
+                     this.setState({
+                        location: res.data.name,
+                        country: res.data.sys.country,
+                        temperature: res.data.main.temp,
+                        feelsLike: res.data.main.feels_like,
+                        icon: res.data.weather[0].icon
+                     })
                   })
                })
-
             })
-         })
-         //käyttjä ei ole kirjautunut -> hakee hervannan sään
-      } else {
-         getWeather('33720').then(res => {
-            console.log('then data');
-            if (!res) {
-               this.setState({ error: 'error while fetching weather data' })
-               return;
-            }
+            //käyttjä ei ole kirjautunut -> hakee hervannan sään
+         } else {
+            getWeather('33720').then(res => {
+               if (!res) {
+                  this.setState({ error: 'error while fetching weather data' })
+                  return;
+               }
 
-            this.setState({
-               location: res.data.name,
-               country: res.data.sys.country,
-               temperature: res.data.main.temp,
-               feelsLike: res.data.main.feels_like,
-               icon: res.data.weather[0].icon
+               this.setState({
+                  location: res.data.name,
+                  country: res.data.sys.country,
+                  temperature: res.data.main.temp,
+                  feelsLike: res.data.main.feels_like,
+                  icon: res.data.weather[0].icon,
+                  zip: '33720'
+               })
             })
-         })
+         }
+
+         // getRoomTemp('40020853')
+         //    .then(res => {
+         //       if (res === undefined || res.data === null) { // !res
+         //          this.setState({ error: 'error while fetching apartment temperature data' })
+         //          console.log(this.state.error);
+         //          return;
+         //       }
+
+         //       this.setState({
+         //          roomTemperature: res.data.Temp,
+         //          roomHumidity: res.data.Humidity
+         //       })
+         //    })
+
+         getRoomTempHistory('40020853')
+            .then(res => {
+               if (res === undefined || res.data === null) { // !res
+                  this.setState({ error: 'error2 while fetching apartment temperature data' })
+                  console.log(this.state.error);
+                  return;
+               }
+               // parse data to temperature and humidity lists for the chart
+               var tempToday = res.data.map(list => {
+                  return list.Temp
+               })
+               var humToday = res.data.map(list => {
+                  return list.Hum
+               })
+               var tempYesterday = tempToday.splice(0, 24);
+               var humYesterday = humToday.splice(0, 24);
+
+               this.setState({
+                  roomHistoryData: res.data,
+                  tempToday: tempToday,
+                  tempYesterday: tempYesterday,
+                  humToday: humToday,
+                  humYesterday: humYesterday
+               })
+            })
+            // kertoo milloin on hakenut datan ja asettaa loading false -> 
+            .finally(() => (
+               this.setState({
+                  loading: false
+               })));
       }
 
+      hourly();
+      //fetches data once per hour
+      this._interval = window.setInterval(hourly, 300000);
 
-
-      // getRoomTemp('40020853')
-      //    .then(res => {
-      //       if (res === undefined || res.data === null) { // !res
-      //          this.setState({ error: 'error while fetching apartment temperature data' })
-      //          console.log(this.state.error);
-      //          return;
-      //       }
-      //       console.log(res);
-
-      //       this.setState({
-      //          roomTemperature: res.data.Temp,
-      //          roomHumidity: res.data.Humidity
-      //       })
-      //    })
-
-      getRoomTempHistory('40020853')
-         .then(res => {
-            if (res === undefined || res.data === null) { // !res
-               this.setState({ error: 'error2 while fetching apartment temperature data' })
-               console.log(this.state.error);
-               return;
-            }
-
-
-            // parse data to temperature and humidity lists for the chart
-            var tempToday = res.data.map(list => {
-               return list.Temp
-            })
-            var humToday = res.data.map(list => {
-               return list.Hum
-            })
-            var tempYesterday = tempToday.splice(0, 24);
-            var humYesterday = humToday.splice(0, 24);
-
-            this.setState({
-               roomHistoryData: res.data,
-               tempToday: tempToday,
-               tempYesterday: tempYesterday,
-               humToday: humToday,
-               humYesterday: humYesterday
-            })
-         })
-         // kertoo milloin on hakenut datan ja asettaa loading false -> 
-         .finally(() => (
-            this.setState({
-               loading: false
-            })));
-
-
-
-
+   }
+   componentWillUnmount() {
+      this._interval && window.clearInterval(this._interval);
    }
 
    toggleTheme = () => {
@@ -165,9 +169,6 @@ class Landing extends Component {
 
    //renderöi Dashboardin ja antaa tarvittavan datan mappina
    renderDashboard = () => {
-      console.log('MANAGERDATA');
-      console.log(this.state.tempToday[0]);
-
       return <Dashboard
          tempToday={this.state.tempToday}
          tempYesterday={this.state.tempYesterday}
@@ -221,7 +222,7 @@ class Landing extends Component {
 
                   </ul>
                   <div className="App">
-                     <WeekContainer location={location} />
+                     <WeekContainer zip={zip} />
                   </div>
                </section>
                <section className="card card--egain">

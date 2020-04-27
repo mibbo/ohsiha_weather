@@ -48,6 +48,8 @@ module.exports = {
    },
 
    async roomTempHistory(req, response) {
+      console.log('ROOMTEMPHISTORY ROOMTEMPHISTORY');
+
       var options = {
          'method': 'POST',
          'url': 'http://install.egain.se/Home/ListSensorValues',
@@ -68,7 +70,7 @@ module.exports = {
          console.log(typeof (res.body))
          var data = JSON.parse(res.body);
          response.json(data)
-         console.log(data);
+         // console.log(data);
       });
    }
 }

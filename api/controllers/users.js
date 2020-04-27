@@ -56,8 +56,13 @@ module.exports = {
                      username: user.username
                   }
                   let token = jwt.sign(payload, process.env.SECRET_KEY, {
-                     expiresIn: 1440000 //1440
+                     expiresIn: '24h' //1440
                   })
+
+                  console.log('-----------backend login token eli juuri tehty token-------------');
+                  console.log(token);
+                  console.log('------------------------');
+
                   res.send(token)
                   console.log("token");
                } else {
@@ -77,6 +82,10 @@ module.exports = {
 
 
    async profile(req, res) {
+      console.log('-----------backend profile token-------------');
+      console.log(req.headers['authorization']);
+      console.log('------------------------');
+
       var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
       User.findOne({
@@ -98,7 +107,7 @@ module.exports = {
       User.findOneAndUpdate(
          { username: req.body.username },
          { $set: { zipcode: req.body.zip } },
-         { upsert: true }, function (err, doc) {
+         { upsert: true, useFindAndModify: false }, function (err, doc) {
             if (err) { throw err; }
             else {
                console.log("zipcode updated");

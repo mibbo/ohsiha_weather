@@ -8,7 +8,6 @@ export const register = newUser => {
          password: newUser.password
       })
       .then(response => {
-         console.log(response);
          if (response.data.status === 'Registered!') {
             return 'success';
          } else if (response.data.error === 'User already exists') {
@@ -26,7 +25,6 @@ export const login = user => {
          password: user.password
       })
       .then(response => {
-         console.log(response);
          if (response.data.error) {
             return response.data.error
          } else {
@@ -45,8 +43,6 @@ export const getProfile = token => {
          headers: { Authorization: ` ${token}` }
       })
       .then(response => {
-         console.log(response)
-         console.log(response.data);
          return response.data
       })
       .catch(err => {
@@ -55,7 +51,6 @@ export const getProfile = token => {
 }
 
 export const changeUserData = data => {
-   console.log('changeUserData');
    return axios
       .post('users/changeUserData', {
          username: data.username,
@@ -63,7 +58,6 @@ export const changeUserData = data => {
       })
       .then(response => {
          if (response.status === 200) {
-            console.log(response.data);
             // palauttaa zip koodin stringinä
             return response.data;
          }
@@ -82,7 +76,6 @@ export const getUserZip = data => {
       })
       .then(response => {
          if (response.status === 200) {
-            console.log(response.data);
             // palauttaa zip koodin stringinä
             return response.data;
          }
@@ -94,7 +87,6 @@ export const getUserZip = data => {
 
 
 export const getWeather = data => {
-   console.log('getWeather');
    return axios
       //saa tarvittavat datat json muodossa
       .get('weather/zipWeather', {

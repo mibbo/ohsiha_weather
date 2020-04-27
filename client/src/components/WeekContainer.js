@@ -6,13 +6,25 @@ class WeekContainer extends React.Component {
    state = {
       fullData: [],
       dailyData: [],
-      location: '',
+      zip: '',
+   }
+   constructor(props) { // tällä zip-zip toimiin
+      super(props);
+      console.log(this.props)
    }
 
    componentDidMount = () => {
-      this.setState({ location: this.props.location });
+      this.setState({ zip: this.props.zip });
+
+      // const zip = this.props.zip;
+      // const country = 'fi';
+      // // build api URL with user zip and api key
+      // const baseURL = 'http://api.openweathermap.org/data/2.5/forecast?zip=' + zip + ',' + country;
+      // const apiId = '&appid=0cb470bd4094e6bdd06e699372db26a4&units=metric';
+      // const weatherURL = baseURL + apiId;
+
       const weatherURL =
-         `http://api.openweathermap.org/data/2.5/forecast?q=Tampere&units=metric&appid=0cb470bd4094e6bdd06e699372db26a4`
+         'http://api.openweathermap.org/data/2.5/forecast?q=Tampere&units=metric&appid=0cb470bd4094e6bdd06e699372db26a4'
 
       const getQuotes = () => {
          fetch(weatherURL)
@@ -42,6 +54,7 @@ class WeekContainer extends React.Component {
    render() {
       return (
          <div className="container">
+            <h4>{this.props.zip}</h4>
             <div className="row justify-content-center">
                {this.formatDayCards()}
             </div>
