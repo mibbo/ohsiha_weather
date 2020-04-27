@@ -14,6 +14,12 @@ export default class Dashboard extends Component {
       super(props);
    }
 
+   componentDidUpdate = () => {
+      if (this.state.todayData !== prevState.todayData) {
+         console.log('historyChart update');
+      }
+   }
+
 
    // Vaihtaa data käyttäjän painaessa nappia
    handleButtonClick = e => {

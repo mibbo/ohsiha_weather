@@ -15,6 +15,12 @@ class WeekContainer extends React.Component {
       // this.setState({ zip: this.props.zip });
    }
 
+   componentDidUpdate = () => {
+      if (this.state.dailyData !== prevState.dailyData) {
+         console.log('Dailycards update');
+      }
+   }
+
    componentDidMount = () => {
       // this.setState({ zip: this.props.zip });
       // console.log('FETCH ZIPPI');
