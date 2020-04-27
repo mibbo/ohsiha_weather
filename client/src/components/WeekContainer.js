@@ -15,25 +15,13 @@ class WeekContainer extends React.Component {
       // this.setState({ zip: this.props.zip });
    }
 
-   componentDidUpdate(prevProps, prevState) {
-      if (this.state.dailyData !== prevState.dailyData) {
-         console.log('Dailycards update');
-      }
-   }
+   // componentDidUpdate(prevProps, prevState) {
+   //    if (this.state.dailyData !== prevState.dailyData) {
+   //       console.log('Dailycards update');
+   //    }
+   // }
 
    componentDidMount = () => {
-      // this.setState({ zip: this.props.zip });
-      // console.log('FETCH ZIPPI');
-      // console.log(this.state.zip);
-      // console.log(this.props.zip);
-      console.log('------zippiii-----');
-
-      const storagezip = localStorage.localZip
-      console.log(this.state.userZip);
-      console.log(storagezip);
-
-
-
       const zip = localStorage.localZip
       const country = 'fi';
       // build api URL with user zip and api key

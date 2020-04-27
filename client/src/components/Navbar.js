@@ -8,6 +8,7 @@ class Landing extends Component {
       event.preventDefault()
       //removes usertoken from localStorage
       localStorage.removeItem('usertoken')
+      localStorage.setItem('localZip', '33720')
       //pushes the user (url) back to '/'
       this.props.history.push('/')
    }

@@ -14,11 +14,11 @@ export default class Dashboard extends Component {
       super(props);
    }
 
-   componentDidUpdate(prevProps, prevState) {
-      if (this.state.todayData !== prevState.todayData) {
-         console.log('historyChart update');
-      }
-   }
+   // componentDidUpdate(prevProps, prevState) {
+   //    if (this.state.todayData !== prevState.todayData) {
+   //       console.log('historyChart update');
+   //    }
+   // }
 
 
    // Vaihtaa data käyttäjän painaessa nappia
