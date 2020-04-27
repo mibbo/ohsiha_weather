@@ -21,11 +21,13 @@ export default class Dashboard extends Component {
    // }
    componentDidMount = () => {
       //kokeile myös handleButtonClick() 
-      this._interval = window.setInterval(this.handleButtonClick(this.state.info), 900000); //3600000
+      this._interval = window.setInterval((e) => this.handleButtonClick.bind(this.state.info, e), 20000); //3600000 900000
    }
 
    // Vaihtaa data käyttäjän painaessa nappia
    handleButtonClick = e => {
+      console.log('------------------update chart--------------------');
+
       const { value } = e.target;
       const isAnnual = value === "Temperature °C";
 
