@@ -77,6 +77,8 @@ class Profile extends Component {
             this.setState({
                staticZip: userZip
             })
+            localStorage.setItem('localZip', userZip)
+
 
             console.log('backendistä saatu zip: ' + userZip);
          })
