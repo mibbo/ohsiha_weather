@@ -6,35 +6,52 @@ class WeekContainer extends React.Component {
    state = {
       fullData: [],
       dailyData: [],
-      zip: '',
+      userZip: this.props.zip,
+      error: ''
    }
    constructor(props) { // tällä zip-zip toimiin
       super(props);
-      console.log(this.props)
+      // console.log(this.props)
+      // this.setState({ zip: this.props.zip });
    }
 
    componentDidMount = () => {
-      this.setState({ zip: this.props.zip });
+      // this.setState({ zip: this.props.zip });
+      // console.log('FETCH ZIPPI');
+      // console.log(this.state.zip);
+      // console.log(this.props.zip);
+      console.log('------zippiii-----');
 
-      // const zip = this.props.zip;
-      // const country = 'fi';
-      // // build api URL with user zip and api key
-      // const baseURL = 'http://api.openweathermap.org/data/2.5/forecast?zip=' + zip + ',' + country;
-      // const apiId = '&appid=0cb470bd4094e6bdd06e699372db26a4&units=metric';
-      // const weatherURL = baseURL + apiId;
+      const storagezip = localStorage.localZip
+      console.log(this.state.userZip);
+      console.log(storagezip);
 
-      const weatherURL =
-         'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=Tampere&units=metric&appid=0cb470bd4094e6bdd06e699372db26a4'
+
+
+      const zip = localStorage.localZip
+      const country = 'fi';
+      // build api URL with user zip and api key
+      const baseURL = 'http://api.openweathermap.org/data/2.5/forecast?zip=' + zip + ',' + country;
+      const apiId = '&appid=5146e8a2b64730def76488283a5ec4f0&units=metric';
+      const weatherURL = baseURL + apiId;
+
+      // const weatherURL =
+      //    'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=Tampere&units=metric&appid=5146e8a2b64730def76488283a5ec4f0'
 
       const getQuotes = () => {
          fetch(weatherURL)
             .then(res => res.json())
             .then(data => {
-               const dailyData = data.list.filter(reading => reading.dt_txt.includes("12:00:00"))
-               this.setState({
-                  fullData: data.list,
-                  dailyData: dailyData
-               }, () => console.log(this.state))
+               if (data.list !== undefined) {
+                  const dailyData = data.list.filter(reading => reading.dt_txt.includes("12:00:00"))
+                  this.setState({
+                     fullData: data.list,
+                     dailyData: dailyData
+                  }, () => console.log(this.state))
+               } else {
+                  this.setState({ error: 'Incorrect postal code' })
+               }
+
             })
       };
       // fetch data when component mounts
@@ -54,7 +71,11 @@ class WeekContainer extends React.Component {
    render() {
       return (
          <div className="container">
-            <h4>{this.props.zip}</h4>
+            <h4>mitä{this.props.zip}</h4>
+            <h4>localstorage: {localStorage.localZip}</h4>
+            <span>
+               {this.state.error}
+            </span>
             <div className="row justify-content-center">
                {this.formatDayCards()}
             </div>

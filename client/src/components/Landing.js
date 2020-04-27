@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useEffect, useState } from 'react'
+import React, { Component, Fragment } from 'react'
 import { getWeather, getRoomTemp, getRoomTempHistory, getProfile, getUserZip } from './UserFunctions'
 
 import WeekContainer from './WeekContainer';
@@ -68,6 +68,8 @@ class Landing extends Component {
                   this.setState({
                      zip: userZip
                   })
+                  localStorage.setItem('localZip', userZip)
+
                   getWeather(userZip).then(res => {
                      if (!res) {
                         this.setState({ error: 'error while fetching weather data' })
@@ -99,6 +101,8 @@ class Landing extends Component {
                   icon: res.data.weather[0].icon,
                   zip: '33720'
                })
+               localStorage.setItem('localZip', '33720')
+
             })
          }
 
