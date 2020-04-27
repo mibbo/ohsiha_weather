@@ -32,6 +32,8 @@ class Profile extends Component {
       this.setState({
          staticZip: this.state.zip
       })
+      localStorage.setItem('localZip', this.state.zip)
+
 
       console.log(this.state);
 
@@ -52,13 +54,11 @@ class Profile extends Component {
 
       getUserZip(this.state.username).then(status => {
          var userZip = status
-         this.setState({
-            staticZip: userZip
-         })
+         // this.setState({
+         //    staticZip: userZip
+         // })
 
          console.log('backendistä saatu zip: ' + userZip);
-         localStorage.setItem('localZip', userZip)
-
       })
 
    }
