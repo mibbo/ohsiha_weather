@@ -54,6 +54,8 @@ class Profile extends Component {
          })
 
          console.log('backendistä saatu zip: ' + userZip);
+         localStorage.setItem('localZip', userZip)
+
       })
 
    }
