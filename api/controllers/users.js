@@ -56,7 +56,7 @@ module.exports = {
                      username: user.username
                   }
                   let token = jwt.sign(payload, process.env.SECRET_KEY, {
-                     expiresIn: '24h' //1440
+                     // expiresIn: '24h' //1440
                   })
 
                   console.log('-----------backend login token eli juuri tehty token-------------');

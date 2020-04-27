@@ -45,7 +45,11 @@ class Landing extends Component {
       this.setState({ theme: localStorage.theme })
       const token = localStorage.usertoken
 
+
       const hourly = () => {
+         console.log('-----------LANDING sivun token-------------');
+         console.log(token);
+         console.log('------------------------');
          //jos käyttäjä kirjautunut niin hakee käyttäjäkohtaisen säädatan
          if (localStorage.usertoken) {
             getProfile(token).then(res => {

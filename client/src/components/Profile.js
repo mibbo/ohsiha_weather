@@ -62,6 +62,9 @@ class Profile extends Component {
    componentDidMount() {
       this.setState({ theme: localStorage.theme })
       const token = localStorage.usertoken
+      console.log('-----------frontend profile sivun token-------------');
+      console.log(token);
+      console.log('------------------------');
       // const decoded = jwt_decode(token)
       // this.setState({
       // username: decoded.username
