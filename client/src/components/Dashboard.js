@@ -8,7 +8,6 @@ export default class Dashboard extends Component {
       yesterdayData: this.props.tempYesterday,
       labels: ["00:00", "01:00", "04:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"],
       info: 'Temperature °C',
-      test: '-'
    }
 
    constructor(props) {
@@ -33,11 +32,10 @@ export default class Dashboard extends Component {
    }
 
    render() {
-      const { todayData, yesterdayData, labels, info, test } = this.state;
+      const { todayData, yesterdayData, labels, info } = this.state;
       return (
          <div className={classes.chartcontainer}>
             <h4>{info}</h4>
-            <h4>{test}</h4>
             <div className={classes.buttonContainer}>
                <button
                   value="today"
