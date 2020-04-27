@@ -149,12 +149,15 @@ class Landing extends Component {
             .finally(() => (
                this.setState({
                   loading: false
-               })));
+               },
+                  this.forceUpdate()
+               )));
+
       }
 
       hourly();
       //fetches data once per hour
-      this._interval = window.setInterval(hourly, 300000);
+      this._interval = window.setInterval(hourly, 300000);  //30min: 1800000
 
    }
    componentWillUnmount() {

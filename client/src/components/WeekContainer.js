@@ -51,13 +51,14 @@ class WeekContainer extends React.Component {
                } else {
                   this.setState({ error: 'Incorrect postal code' })
                }
-
+               this.forceUpdate()
             })
       };
       // fetch data when component mounts
       getQuotes();
-      // fetches data every 6 hours
-      this._interval = window.setInterval(getQuotes, 21600000);
+      // fetches data every hour
+      this._interval = window.setInterval(getQuotes, 3600000);
+
    }
 
    componentWillUnmount() {
