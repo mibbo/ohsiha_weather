@@ -38,40 +38,42 @@ export default class Dashboard extends Component {
    // }
 
    componentDidUpdate(prevProps, prevState) {
-      if (prevProps.tempToday !== this.state.tempToday) {
+      if (prevProps.tempToday !== this.state.todayData) {
          //Perform some operation here
-         console.log('//Perform some operation here');
+         console.log('dashboardi sai jotai kamaa');
+
+         //ei toiminu perkele tai vois toimia nyt kun vaihdoin this.state.todayDataksi
 
 
-         getRoomTempHistory('40020853')
-            .then(res => {
-               if (res === undefined || res.data === null) { // !res
-                  this.setState({ error: 'error2 while fetching apartment temperature data' })
-                  console.log(this.state.error);
-                  return;
-               }
-               // parse data to temperature and humidity lists for the chart
-               var tempToday = res.data.map(list => {
-                  return list.Temp
-               })
-               var humToday = res.data.map(list => {
-                  return list.Hum
-               })
-               var tempYesterday = tempToday.splice(0, 24);
-               var humYesterday = humToday.splice(0, 24);
+         // getRoomTempHistory('40020853')
+         //    .then(res => {
+         //       if (res === undefined || res.data === null) { // !res
+         //          this.setState({ error: 'error2 while fetching apartment temperature data' })
+         //          console.log(this.state.error);
+         //          return;
+         //       }
+         //       // parse data to temperature and humidity lists for the chart
+         //       var tempToday = res.data.map(list => {
+         //          return list.Temp
+         //       })
+         //       var humToday = res.data.map(list => {
+         //          return list.Hum
+         //       })
+         //       var tempYesterday = tempToday.splice(0, 24);
+         //       var humYesterday = humToday.splice(0, 24);
 
-               if (this.state.info === "Temperature °C") {
-                  this.setState({
-                     todayData: tempToday,
-                     yesterdayData: tempYesterday
-                  })
-               } else {
-                  this.setState({
-                     todayData: humToday,
-                     yesterdayData: humYesterday
-                  })
-               }
-            })
+         //       if (this.state.info === "Temperature °C") {
+         //          this.setState({
+         //             todayData: tempToday,
+         //             yesterdayData: tempYesterday
+         //          })
+         //       } else {
+         //          this.setState({
+         //             todayData: humToday,
+         //             yesterdayData: humYesterday
+         //          })
+         //       }
+         //    })
 
       }
    }

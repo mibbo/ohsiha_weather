@@ -137,6 +137,8 @@ class Landing extends Component {
                var tempYesterday = tempToday.splice(0, 24);
                var humYesterday = humToday.splice(0, 24);
 
+               console.log('dashboardiin kamaa');
+
                this.setState({
                   roomHistoryData: res.data,
                   tempToday: tempToday,
