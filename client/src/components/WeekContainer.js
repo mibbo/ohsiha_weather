@@ -31,7 +31,7 @@ class WeekContainer extends React.Component {
       const zip = localStorage.localZip
       const country = 'fi';
       // build api URL with user zip and api key
-      const baseURL = 'http://api.openweathermap.org/data/2.5/forecast?zip=' + zip + ',' + country;
+      const baseURL = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?zip=' + zip + ',' + country;
       const apiId = '&appid=5146e8a2b64730def76488283a5ec4f0&units=metric';
       const weatherURL = baseURL + apiId;
 
