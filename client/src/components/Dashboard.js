@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import classes from "./Chart.module.css";
 import HistoryChart from './HistoryChart';
+import { getRoomTempHistory } from './UserFunctions'
+
 
 export default class Dashboard extends Component {
    state = {
@@ -14,15 +16,67 @@ export default class Dashboard extends Component {
       super(props);
    }
 
+   componentDidMount = () => {
+      //kokeile myös handleButtonClick() 
+
+
+      // this._interval = window.setInterval(this.handleButtonClick.bind(this, this.state.info), 10000); //3600000 900000
+   }
+
    // componentDidUpdate(prevProps, prevState) {
    //    if (this.state.todayData !== prevState.todayData) {
    //       console.log('historyChart update');
    //    }
    // }
-   componentDidMount = () => {
-      //kokeile myös handleButtonClick() 
-      this._interval = window.setInterval((e) => this.handleButtonClick.bind(this.state.info, e), 20000); //3600000 900000
+
+   // static getDerivedStateFromProps(nextProps, prevState) {
+
+   //    if (nextProps.tempToday !== prevState.todayData) {
+   //       return { todayData: nextProps.tempToday };
+   //    }
+   //    else return null;
+   // }
+
+   componentDidUpdate(prevProps, prevState) {
+      if (prevProps.tempToday !== this.state.tempToday) {
+         //Perform some operation here
+         console.log('//Perform some operation here');
+
+
+         getRoomTempHistory('40020853')
+            .then(res => {
+               if (res === undefined || res.data === null) { // !res
+                  this.setState({ error: 'error2 while fetching apartment temperature data' })
+                  console.log(this.state.error);
+                  return;
+               }
+               // parse data to temperature and humidity lists for the chart
+               var tempToday = res.data.map(list => {
+                  return list.Temp
+               })
+               var humToday = res.data.map(list => {
+                  return list.Hum
+               })
+               var tempYesterday = tempToday.splice(0, 24);
+               var humYesterday = humToday.splice(0, 24);
+
+               if (this.state.info === "Temperature °C") {
+                  this.setState({
+                     todayData: tempToday,
+                     yesterdayData: tempYesterday
+                  })
+               } else {
+                  this.setState({
+                     todayData: humToday,
+                     yesterdayData: humYesterday
+                  })
+               }
+            })
+
+      }
    }
+
+
 
    // Vaihtaa data käyttäjän painaessa nappia
    handleButtonClick = e => {
@@ -41,6 +95,8 @@ export default class Dashboard extends Component {
          info: newInfo
       })
    }
+
+
    componentWillUnmount() {
       this._interval && window.clearInterval(this._interval);
    }
