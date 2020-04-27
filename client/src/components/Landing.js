@@ -46,6 +46,7 @@ class Landing extends Component {
 
 
       const token = localStorage.usertoken
+      console.log(token);
 
       //jos käyttäjä kirjautunut niin hakee käyttäjäkohtaisen säädatan
       if (localStorage.usertoken) {
