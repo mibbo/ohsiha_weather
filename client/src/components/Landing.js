@@ -118,6 +118,10 @@ class Landing extends Component {
          //          roomHumidity: res.data.Humidity
          //       })
          //    })
+         this.setState({
+            loading: true
+         })
+         console.log('loading: true');
 
          getRoomTempHistory('40020853')
             .then(res => {
@@ -150,10 +154,11 @@ class Landing extends Component {
             })
             // kertoo milloin on hakenut datan ja asettaa loading false -> 
             .finally(() => (
+               console.log('loading: false'),
                this.setState({
                   loading: false
                },
-                  this.renderDashboard()
+                  // this.renderDashboard()
                )));
 
       }
