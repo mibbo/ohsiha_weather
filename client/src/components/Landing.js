@@ -118,10 +118,7 @@ class Landing extends Component {
          //          roomHumidity: res.data.Humidity
          //       })
          //    })
-         this.setState({
-            loading: true
-         })
-         console.log('loading: true');
+
 
          getRoomTempHistory('40020853')
             .then(res => {
@@ -130,6 +127,11 @@ class Landing extends Component {
                   console.log(this.state.error);
                   return;
                }
+
+               this.setState({
+                  loading: true
+               })
+               console.log('loading: true');
                // parse data to temperature and humidity lists for the chart
                var tempToday = res.data.map(list => {
                   return list.Temp
