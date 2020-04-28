@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from "./Chart.module.css";
 import HistoryChart from './HistoryChart';
 import { getRoomTempHistory } from './UserFunctions'
+import { set } from 'mongoose';
 
 
 export default class Dashboard extends Component {
@@ -41,6 +42,12 @@ export default class Dashboard extends Component {
       if (prevProps.tempToday !== this.state.todayData) {
          //Perform some operation here
          console.log('dashboardi sai jotai kamaa');
+         console.log(prevProps.tempToday);
+         this.setState({
+            todayData: prevProps.tempToday,
+            yesterdayData: prevProps.tempYesterday
+         })
+
 
          //ei toiminu perkele tai vois toimia nyt kun vaihdoin this.state.todayDataksi
 
