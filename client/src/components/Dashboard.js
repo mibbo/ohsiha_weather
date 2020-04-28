@@ -17,24 +17,24 @@ export default class Dashboard extends Component {
       super(props);
    }
 
-   componentDidUpdate(prevProps, prevState) {
-      if (prevProps.tempToday !== this.props.tempToday) {
-         //Perform some operation here
-         console.log('dashboardi sai jotai kamaa');
-         console.log(prevProps.tempToday);
-         if (this.state.info === "Temperature °C") {
-            this.setState({
-               todayData: prevProps.tempToday,
-               yesterdayData: prevProps.tempYesterday
-            })
-         } else {
-            this.setState({
-               todayData: prevProps.humToday,
-               yesterdayData: prevProps.humYesterday
-            })
-         }
-      }
-   }
+   // componentDidUpdate(prevProps, prevState) {
+   //    if (prevProps.tempToday !== this.state.todayData) {
+   //       //Perform some operation here
+   //       console.log('dashboardi sai jotai kamaa');
+   //       console.log(prevProps.tempToday);
+   //       if (this.state.info === "Temperature °C") {
+   //          this.setState({
+   //             todayData: prevProps.tempToday,
+   //             yesterdayData: prevProps.tempYesterday
+   //          })
+   //       } else {
+   //          this.setState({
+   //             todayData: prevProps.humToday,
+   //             yesterdayData: prevProps.humYesterday
+   //          })
+   //       }
+   //    }
+   // }
 
 
 

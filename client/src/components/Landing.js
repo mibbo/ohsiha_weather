@@ -127,7 +127,6 @@ class Landing extends Component {
                   console.log(this.state.error);
                   return;
                }
-
                this.setState({
                   loading: true
                })
