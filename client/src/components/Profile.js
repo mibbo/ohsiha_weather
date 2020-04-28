@@ -57,8 +57,6 @@ class Profile extends Component {
          // this.setState({
          //    staticZip: userZip
          // })
-
-         console.log('backendistä saatu zip: ' + userZip);
       })
 
    }
@@ -67,9 +65,6 @@ class Profile extends Component {
    componentDidMount() {
       this.setState({ theme: localStorage.theme })
       const token = localStorage.usertoken
-      console.log('-----------frontend profile sivun token-------------');
-      console.log(token);
-      console.log('------------------------');
       // const decoded = jwt_decode(token)
       // this.setState({
       // username: decoded.username
@@ -83,7 +78,6 @@ class Profile extends Component {
                staticZip: userZip
             })
             localStorage.setItem('localZip', userZip)
-            console.log('backendistä saatu zip: ' + userZip);
          })
       })
 

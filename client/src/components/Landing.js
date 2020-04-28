@@ -47,9 +47,8 @@ class Landing extends Component {
 
 
       const hourly = () => {
-         console.log('-----------LANDING sivun token-------------');
-         console.log(token);
-         console.log('------------------------');
+         console.log('15min');
+
          //jos käyttäjä kirjautunut niin hakee käyttäjäkohtaisen säädatan
          if (localStorage.usertoken) {
             getProfile(token).then(res => {
@@ -146,13 +145,15 @@ class Landing extends Component {
                   humToday: humToday,
                   humYesterday: humYesterday
                })
+               this.renderDashboard()
+
             })
             // kertoo milloin on hakenut datan ja asettaa loading false -> 
             .finally(() => (
                this.setState({
                   loading: false
                },
-                  this.forceUpdate()
+                  this.renderDashboard()
                )));
 
       }

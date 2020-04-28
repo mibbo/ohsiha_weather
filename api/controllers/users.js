@@ -59,12 +59,7 @@ module.exports = {
                      // expiresIn: '24h' //1440
                   })
 
-                  console.log('-----------backend login token eli juuri tehty token-------------');
-                  console.log(token);
-                  console.log('------------------------');
-
                   res.send(token)
-                  console.log("token");
                } else {
                   // Passwords don't match
                   res.json({ error: 'Wrong password' })
@@ -82,9 +77,6 @@ module.exports = {
 
 
    async profile(req, res) {
-      console.log('-----------backend profile token-------------');
-      console.log(req.headers['authorization']);
-      console.log('------------------------');
 
       var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
