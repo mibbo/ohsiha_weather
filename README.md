@@ -14,4 +14,4 @@ https://ohsiha-weather.herokuapp.com/
 - Type ```npm install``` to install all dependencies
 
 ## Run the app locally
-- type ```npm run dev```
+- Type ```npm run dev```
