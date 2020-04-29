@@ -70,6 +70,9 @@ class Register extends Component {
                            type="text"
                            className="form-control"
                            name="username"
+                           required
+                           minLength="4"
+                           maxLength="16"
                            placeholder="Enter username"
                            value={username}
                            onChange={this.onChange}
@@ -81,6 +84,9 @@ class Register extends Component {
                            type="password"
                            className="form-control"
                            name="password"
+                           required
+                           minLength="4"
+                           maxLength="16"
                            placeholder="Password"
                            value={password}
                            onChange={this.onChange}

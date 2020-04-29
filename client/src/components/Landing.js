@@ -107,7 +107,7 @@ class Landing extends Component {
          getRoomTemp('40020853')
             .then(res => {
                if (res === undefined || res.data === null) { // !res
-                  this.setState({ error: 'error while fetching apartment temperature data' })
+                  this.setState({ error: 'error: monthly API-requests exceeded' })
                   console.log(this.state.error);
                   return;
                }
@@ -225,10 +225,6 @@ class Landing extends Component {
                   <header>
                      <h1 className="text-center">Weather</h1>
                   </header>
-
-                  <span>
-                     {error}
-                  </span>
                   <ul>
                      <li id='location'>{location}, {zip}, {country}</li>
                      <li id='temp'><sup><img src={'http://openweathermap.org/img/wn/' + icon + '@2x.png'} /></sup>{Math.round(temperature)}<sup>°C</sup></li>
@@ -252,6 +248,9 @@ class Landing extends Component {
                      {/* <li id='time'>lisää aika tähän </li> */}
 
                   </ul>
+                  <span>
+                     {error}
+                  </span>
                </section >
                <section className="card card--history">
                   <header>

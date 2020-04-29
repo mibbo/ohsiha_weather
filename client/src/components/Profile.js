@@ -118,7 +118,9 @@ class Profile extends Component {
                               id="change-location-input"
                               type="text"
                               className="form-control"
-                              name="zip"
+                              name="zip" required
+                              minLength="5"
+                              maxLength="5"
                               placeholder="Enter zip code"
                               value={this.state.zip}
                               onChange={this.onChange}

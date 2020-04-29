@@ -24,28 +24,24 @@ export const GlobalStyles = createGlobalStyle`
  }
 
 #feels {
-   color: ${({ theme }) => theme.feels};
- }
+  color: ${({ theme }) => theme.feels};
+}
 
 #line {
-   background: ${({ theme }) => theme.line};
- }
+  background: ${({ theme }) => theme.line};
+}
 
 .card {
-   background: ${({ theme }) => theme.card};
+  background: ${({ theme }) => theme.card};
 }
 .card > header {
-   background: ${({ theme }) => theme.cardHeader};
+  background: ${({ theme }) => theme.cardHeader};
 }
-
-
-
-
-  body {
-    background: ${({ theme }) => theme.body};
-    color: ${({ theme }) => theme.text};
-    transition: all 0.25s linear;
-  }
+body {
+  background: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.text};
+  transition: all 0.25s linear;
+}
 
 //   footer {
 //     position: absolute;

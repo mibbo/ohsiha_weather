@@ -67,6 +67,9 @@ class Login extends Component {
                            type="text"
                            className="form-control"
                            name="username"
+                           required
+                           minLength="4"
+                           maxLength="16"
                            placeholder="Username"
                            value={username}
                            onChange={this.onChange}
@@ -78,6 +81,9 @@ class Login extends Component {
                            type="password"
                            className="form-control"
                            name="password"
+                           required
+                           minLength="4"
+                           maxLength="16"
                            placeholder="Password"
                            value={password}
                            onChange={this.onChange}
