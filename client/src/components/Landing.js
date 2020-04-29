@@ -104,19 +104,19 @@ class Landing extends Component {
          }
 
          // disabled because of request limit in the API
-         // getRoomTemp('40020853')
-         //    .then(res => {
-         //       if (res === undefined || res.data === null) { // !res
-         //          this.setState({ error: 'error while fetching apartment temperature data' })
-         //          console.log(this.state.error);
-         //          return;
-         //       }
+         getRoomTemp('40020853')
+            .then(res => {
+               if (res === undefined || res.data === null) { // !res
+                  this.setState({ error: 'error while fetching apartment temperature data' })
+                  console.log(this.state.error);
+                  return;
+               }
 
-         //       this.setState({
-         //          roomTemperature: res.data.Temp,
-         //          roomHumidity: res.data.Humidity
-         //       })
-         //    })
+               this.setState({
+                  roomTemperature: res.data.Temp,
+                  roomHumidity: res.data.Humidity
+               })
+            })
 
 
          getRoomTempHistory('40020853')
