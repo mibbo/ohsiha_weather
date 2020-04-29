@@ -46,9 +46,7 @@ class Landing extends Component {
       const token = localStorage.usertoken
 
 
-      const hourly = () => {
-         console.log('15min');
-
+      const fetchData = () => {
          //jos käyttäjä kirjautunut niin hakee käyttäjäkohtaisen säädatan
          if (localStorage.usertoken) {
             getProfile(token).then(res => {
@@ -105,6 +103,7 @@ class Landing extends Component {
             })
          }
 
+         // disabled because of request limit in the API
          // getRoomTemp('40020853')
          //    .then(res => {
          //       if (res === undefined || res.data === null) { // !res
@@ -141,8 +140,6 @@ class Landing extends Component {
                var tempYesterday = tempToday.splice(0, 24);
                var humYesterday = humToday.splice(0, 24);
 
-               console.log('dashboardiin kamaa');
-
                this.setState({
                   roomHistoryData: res.data,
                   tempToday: tempToday,
@@ -164,9 +161,9 @@ class Landing extends Component {
 
       }
 
-      hourly();
-      //fetches data once per hour
-      this._interval = window.setInterval(hourly, 300000);  //30min: 1800000
+      fetchData();
+      //fetches data every 15min
+      this._interval = window.setInterval(fetchData, 900000);
 
    }
    componentWillUnmount() {
@@ -174,11 +171,11 @@ class Landing extends Component {
    }
 
    toggleTheme = () => {
-      // if the theme is not light, then set it to dark
+      // if theme is light -> set theme to dark
       if (this.state.theme === 'light') {
          localStorage.setItem('theme', 'dark')
          this.setState({ theme: 'dark' })
-         // otherwise, it should be light
+         // otherwise, sets it to light
       } else {
          localStorage.setItem('theme', 'light')
          this.setState({ theme: 'light' })

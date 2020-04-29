@@ -54,9 +54,9 @@ class Profile extends Component {
 
       getUserZip(this.state.username).then(status => {
          var userZip = status
-         // this.setState({
-         //    staticZip: userZip
-         // })
+         this.setState({
+            staticZip: userZip
+         })
       })
 
    }

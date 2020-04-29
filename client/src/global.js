@@ -7,36 +7,36 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  .card.card--day{
+.card.card--day{
    background: ${({ theme }) => theme.cardDay};
  }
 
- .card.card--day > header {
+.card.card--day > header {
    background: ${({ theme }) => theme.cardDayHeader};
   }
 
-  #li1 {
+#li1 {
    color: ${({ theme }) => theme.li1};
  }
 
- #location {
+#location {
    color: ${({ theme }) => theme.location};
  }
 
- #feels {
+#feels {
    color: ${({ theme }) => theme.feels};
  }
 
- #line {
+#line {
    background: ${({ theme }) => theme.line};
  }
 
- .card {
+.card {
    background: ${({ theme }) => theme.card};
- }
-  .card > header {
+}
+.card > header {
    background: ${({ theme }) => theme.cardHeader};
-  }
+}
 
 
 

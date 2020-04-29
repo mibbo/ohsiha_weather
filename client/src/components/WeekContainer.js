@@ -9,17 +9,9 @@ class WeekContainer extends React.Component {
       userZip: this.props.zip,
       error: ''
    }
-   constructor(props) { // tällä zip-zip toimiin
+   constructor(props) {
       super(props);
-      // console.log(this.props)
-      // this.setState({ zip: this.props.zip });
    }
-
-   // componentDidUpdate(prevProps, prevState) {
-   //    if (this.state.dailyData !== prevState.dailyData) {
-   //       console.log('Dailycards update');
-   //    }
-   // }
 
    componentDidMount = () => {
       const zip = localStorage.localZip
@@ -28,9 +20,6 @@ class WeekContainer extends React.Component {
       const baseURL = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?zip=' + zip + ',' + country;
       const apiId = '&appid=5146e8a2b64730def76488283a5ec4f0&units=metric';
       const weatherURL = baseURL + apiId;
-
-      // const weatherURL =
-      //    'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/forecast?q=Tampere&units=metric&appid=5146e8a2b64730def76488283a5ec4f0'
 
       const fetchWeather = () => {
          fetch(weatherURL)
@@ -51,8 +40,7 @@ class WeekContainer extends React.Component {
       // fetch data when component mounts
       fetchWeather();
       // fetches data every hour
-      this._interval = window.setInterval(fetchWeather, 900000); //3600000
-
+      this._interval = window.setInterval(fetchWeather, 3600000);
    }
 
    componentWillUnmount() {

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import classes from "./Chart.module.css";
 import HistoryChart from './HistoryChart';
-import { getRoomTempHistory } from './UserFunctions'
-import { set } from 'mongoose';
 
 
 export default class Dashboard extends Component {
@@ -17,11 +15,9 @@ export default class Dashboard extends Component {
       super(props);
    }
 
+   //hetkellisesti disabloitu, sillä kaataa kaataa backendin kun ohjelma on käynyt pitkään ??
    // componentDidUpdate(prevProps, prevState) {
    //    if (prevProps.tempToday !== this.state.todayData) {
-   //       //Perform some operation here
-   //       console.log('dashboardi sai jotai kamaa');
-   //       console.log(prevProps.tempToday);
    //       if (this.state.info === "Temperature °C") {
    //          this.setState({
    //             todayData: prevProps.tempToday,
