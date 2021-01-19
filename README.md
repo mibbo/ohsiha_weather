@@ -10,7 +10,7 @@ The app is hosted in Heroku. The MongoDB database is managed with MongoDB Atlas 
 ## Features
 - Weather cards for daily weather forecast.
 - Log in and registering an account for saving your location for the weather cards.
-- Shows my apartment current temperature
+- Shows my apartment current temperature and humidity.
 - Shows linechart for my apartments historical temperature and humidity data.
 
 ## Live Demo
