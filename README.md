@@ -5,14 +5,18 @@
 This is a Singe Page Application to done using the MERN stack (MongoDB for our database, Express and Node for our backend, and React for our frontend). 
 The aim for the project was to learn more about web development and especially React since this was my first time using it.
 
-The app consists of registering 
-
 The app is hosted in Heroku. The MongoDB database is managed with MongoDB Atlas and the workload is deployed in Amazon Web Services (AWS).
+
+## Features
+- Weather cards for daily weather forecast.
+- Log in and registering an account for saving your location for the weather cards.
+- Shows my apartment current temperature
+- Shows linechart for my apartments historical temperature and humidity data.
 
 ## Live Demo
 https://ohsiha-weather.herokuapp.com/
 
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![ohsiha_weather_screenshot](https://user-images.githubusercontent.com/59805179/105075150-0b862d80-5a92-11eb-9033-a754eb9ca41b.png)
 
 ## Installation
 - Clone the repo in your terminal
