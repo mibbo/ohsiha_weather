@@ -15,6 +15,7 @@ The app is hosted in Heroku. The MongoDB database is managed with MongoDB Atlas 
 - Dark and light mode for UI elements.
 
 ## Live Demo
+(Live demo currently a little broken, because I moved from the student apartment where the housing cooperative offered API for the data)
 https://ohsiha-weather.herokuapp.com/
 
 ![ohsiha_weather_screenshot](https://user-images.githubusercontent.com/59805179/105075150-0b862d80-5a92-11eb-9033-a754eb9ca41b.png)
